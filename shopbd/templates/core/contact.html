@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Contact Us" %} | {{ site.site_name }}{% endblock %}
+{% block content %}
+<div class="container">
+  <h1 class="page-title">{% trans "Contact Us" %}</h1>
+  <div class="two-col">
+    <section class="card card-body">
+      <h3 class="card-title">{% trans "Send us a message" %}</h3>
+      <form method="post">{% csrf_token %}
+        <div class="form-row">
+          <div class="form-group">{{ form.name.label_tag }}{{ form.name }}{{ form.name.errors }}</div>
+          <div class="form-group">{{ form.email.label_tag }}{{ form.email }}{{ form.email.errors }}</div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">{{ form.phone.label_tag }}{{ form.phone }}</div>
+          <div class="form-group">{{ form.subject.label_tag }}{{ form.subject }}{{ form.subject.errors }}</div>
+        </div>
+        <div class="form-group">{{ form.message.label_tag }}{{ form.message }}{{ form.message.errors }}</div>
+        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> {% trans "Send message" %}</button>
+      </form>
+    </section>
+    <aside class="card card-body pd-side" style="border:0">
+      <h3 class="card-title">{% trans "Get in touch" %}</h3>
+      <div class="row"><i class="fa-solid fa-location-dot"></i><div>{{ site.address }}</div></div>
+      <div class="row"><i class="fa-solid fa-phone"></i><div><a href="tel:{{ site.phone }}" dir="ltr">{{ site.phone }}</a></div></div>
+      <div class="row"><i class="fa-solid fa-envelope"></i><div><a href="mailto:{{ site.email }}">{{ site.email }}</a></div></div>
+      <div class="row"><i class="fa-regular fa-clock"></i><div>{% trans "Sat – Thu, 10:00 AM – 8:00 PM" %}</div></div>
+    </aside>
+  </div>
+</div>
+{% endblock %}

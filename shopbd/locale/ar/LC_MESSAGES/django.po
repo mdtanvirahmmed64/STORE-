@@ -1,0 +1,1315 @@
+# ShopBD — Arabic translation.
+# Edit the msgstr lines, then run:  python manage.py compile_translations
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+msgid "%(n)s items found"
+msgstr "تم العثور على %(n)s منتج"
+
+msgid "%(n)s left"
+msgstr "متبقي %(n)s"
+
+msgid "%(n)s ratings"
+msgstr "%(n)s تقييم"
+
+msgid "%(n)s reviews"
+msgstr "%(n)s مراجعة"
+
+msgid "%(n)s sold"
+msgstr "تم بيع %(n)s"
+
+msgid "%(price)s each"
+msgstr "%(price)s للقطعة"
+
+msgid "& up"
+msgstr "فأكثر"
+
+msgid "100%% Authentic"
+msgstr "أصلي 100%%"
+
+msgid "100%% authentic product"
+msgstr "منتج أصلي 100%%"
+
+msgid "1–2 days"
+msgstr "1–2 يوم"
+
+msgid "3–5 days"
+msgstr "3–5 أيام"
+
+msgid "7 days easy return"
+msgstr "إرجاع سهل خلال 7 أيام"
+
+msgid "7 days return policy"
+msgstr "سياسة إرجاع 7 أيام"
+
+msgid "<strong>%(code)s</strong> applied"
+msgstr "تم تطبيق <strong>%(code)s</strong>"
+
+msgid "Access denied"
+msgstr "تم رفض الوصول"
+
+msgid "Account"
+msgstr "الحساب"
+
+msgid "Add address"
+msgstr "إضافة عنوان"
+
+msgid "Add branch"
+msgstr "إضافة فرع"
+
+msgid "Add more for free delivery over %(amount)s"
+msgstr "أضف المزيد للحصول على توصيل مجاني فوق %(amount)s"
+
+msgid "Add new"
+msgstr "إضافة جديد"
+
+msgid "Add new address"
+msgstr "إضافة عنوان جديد"
+
+msgid "Add product"
+msgstr "إضافة منتج"
+
+msgid "Add to Cart"
+msgstr "أضف إلى السلة"
+
+msgid "Add to cart"
+msgstr "أضف إلى السلة"
+
+msgid "Added to wishlist."
+msgstr "تمت الإضافة إلى المفضلة."
+
+msgid "Address Book"
+msgstr "دفتر العناوين"
+
+msgid "Address deleted."
+msgstr "تم حذف العنوان."
+
+msgid "Address saved."
+msgstr "تم حفظ العنوان."
+
+msgid "Addresses"
+msgstr "العناوين"
+
+msgid "Admin Panel"
+msgstr "لوحة الإدارة"
+
+msgid "All Products"
+msgstr "جميع المنتجات"
+
+msgid "All in %(name)s"
+msgstr "الكل في %(name)s"
+
+msgid "All orders"
+msgstr "جميع الطلبات"
+
+msgid "All over Bangladesh"
+msgstr "في جميع أنحاء بنغلاديش"
+
+msgid "All products are well stocked."
+msgstr "جميع المنتجات متوفرة بكمية كافية."
+
+msgid "All rights reserved."
+msgstr "جميع الحقوق محفوظة."
+
+msgid "Already have an account?"
+msgstr "لديك حساب بالفعل؟"
+
+msgid "An account with this email already exists."
+msgstr "يوجد حساب بهذا البريد الإلكتروني بالفعل."
+
+msgid "Apply"
+msgstr "تطبيق"
+
+msgid "Are you sure you want to cancel this order?"
+msgstr "هل أنت متأكد أنك تريد إلغاء هذا الطلب؟"
+
+msgid "Area"
+msgstr "المنطقة"
+
+msgid "Average sale"
+msgstr "متوسط البيع"
+
+msgid "Back"
+msgstr "رجوع"
+
+msgid "Back to home"
+msgstr "العودة إلى الرئيسية"
+
+msgid "Back to top"
+msgstr "العودة للأعلى"
+
+msgid "Barishal"
+msgstr "باريسال"
+
+msgid "Best Sellers"
+msgstr "الأكثر مبيعاً"
+
+msgid "Best Selling"
+msgstr "الأكثر مبيعاً"
+
+msgid "Bill / Ship to"
+msgstr "الفاتورة / الشحن إلى"
+
+msgid "Branch"
+msgstr "الفرع"
+
+msgid "Branch dashboard"
+msgstr "لوحة الفروع"
+
+msgid "Branches"
+msgstr "الفروع"
+
+msgid "Brand"
+msgstr "العلامة التجارية"
+
+msgid "Browse all products"
+msgstr "تصفح جميع المنتجات"
+
+msgid "Buy Now"
+msgstr "اشترِ الآن"
+
+msgid "By placing your order you agree to our terms & conditions."
+msgstr "بتقديم طلبك فإنك توافق على الشروط والأحكام."
+
+msgid "Cancel"
+msgstr "إلغاء"
+
+msgid "Cancel order"
+msgstr "إلغاء الطلب"
+
+msgid "Cancelled"
+msgstr "ملغي"
+
+msgid "Card"
+msgstr "بطاقة"
+
+msgid "Cart"
+msgstr "السلة"
+
+msgid "Cash"
+msgstr "نقداً"
+
+msgid "Cash on Delivery"
+msgstr "الدفع عند الاستلام"
+
+msgid "Cash on Delivery available"
+msgstr "الدفع عند الاستلام متاح"
+
+msgid "Cash received"
+msgstr "المبلغ المستلم"
+
+msgid "Cashier"
+msgstr "أمين الصندوق"
+
+msgid "Cashiers today"
+msgstr "أمناء الصندوق اليوم"
+
+msgid "Categories"
+msgstr "الفئات"
+
+msgid "Change"
+msgstr "الباقي"
+
+msgid "Change Password"
+msgstr "تغيير كلمة المرور"
+
+msgid "Change password"
+msgstr "تغيير كلمة المرور"
+
+msgid "Change to return"
+msgstr "الباقي للعميل"
+
+msgid "Chattogram"
+msgstr "شيتاغونغ"
+
+msgid "Check your email"
+msgstr "تحقق من بريدك الإلكتروني"
+
+msgid "Checkout"
+msgstr "إتمام الشراء"
+
+msgid "Choose a saved address:"
+msgstr "اختر عنواناً محفوظاً:"
+
+msgid "Choose language"
+msgstr "اختر اللغة"
+
+msgid "Choose options"
+msgstr "اختر الخيارات"
+
+msgid "City / District"
+msgstr "المدينة / المحافظة"
+
+msgid "Clear"
+msgstr "مسح"
+
+msgid "Clear the cart?"
+msgstr "مسح السلة؟"
+
+msgid "Close"
+msgstr "إغلاق"
+
+msgid "Color"
+msgstr "اللون"
+
+msgid "Complete sale & print receipt"
+msgstr "إتمام البيع وطباعة الإيصال"
+
+msgid "Completed"
+msgstr "مكتمل"
+
+msgid "Confirm password"
+msgstr "تأكيد كلمة المرور"
+
+msgid "Confirmed"
+msgstr "مؤكد"
+
+msgid "Contact Us"
+msgstr "اتصل بنا"
+
+msgid "Contact us"
+msgstr "اتصل بنا"
+
+msgid "Continue shopping"
+msgstr "متابعة التسوق"
+
+msgid "Coupon"
+msgstr "القسيمة"
+
+msgid "Coupon applied successfully!"
+msgstr "تم تطبيق القسيمة بنجاح!"
+
+msgid "Coupon code"
+msgstr "رمز القسيمة"
+
+msgid "Coupon removed."
+msgstr "تمت إزالة القسيمة."
+
+msgid "Create account"
+msgstr "إنشاء حساب"
+
+msgid "Create an account"
+msgstr "أنشئ حساباً"
+
+msgid "Create your account"
+msgstr "أنشئ حسابك"
+
+msgid "Customer"
+msgstr "العميل"
+
+msgid "Customer (optional)"
+msgstr "العميل (اختياري)"
+
+msgid "Customer Care"
+msgstr "خدمة العملاء"
+
+msgid "Customers"
+msgstr "العملاء"
+
+msgid "Dashboard"
+msgstr "لوحة التحكم"
+
+msgid "Date"
+msgstr "التاريخ"
+
+msgid "Date of birth"
+msgstr "تاريخ الميلاد"
+
+msgid "Decrease"
+msgstr "إنقاص"
+
+msgid "Default"
+msgstr "افتراضي"
+
+msgid "Default address"
+msgstr "العنوان الافتراضي"
+
+msgid "Delete"
+msgstr "حذف"
+
+msgid "Delete this address?"
+msgstr "حذف هذا العنوان؟"
+
+msgid "Delivered"
+msgstr "تم التوصيل"
+
+msgid "Delivery"
+msgstr "التوصيل"
+
+msgid "Delivery (inside Dhaka)"
+msgstr "التوصيل (داخل دكا)"
+
+msgid "Delivery Information"
+msgstr "معلومات التوصيل"
+
+msgid "Delivery address"
+msgstr "عنوان التوصيل"
+
+msgid "Delivery area"
+msgstr "منطقة التوصيل"
+
+msgid "Delivery charge"
+msgstr "رسوم التوصيل"
+
+msgid "Description"
+msgstr "الوصف"
+
+msgid "Dhaka"
+msgstr "دكا"
+
+msgid "Discount"
+msgstr "الخصم"
+
+msgid "Discount given"
+msgstr "الخصم الممنوح"
+
+msgid "Discount type"
+msgstr "نوع الخصم"
+
+msgid "Division"
+msgstr "القسم الإداري"
+
+msgid "Easy Return"
+msgstr "إرجاع سهل"
+
+msgid "Edit"
+msgstr "تعديل"
+
+msgid "Edit address"
+msgstr "تعديل العنوان"
+
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+msgid "Ends in"
+msgstr "ينتهي خلال"
+
+msgid "Enter a valid phone number (e.g. 01712345678)."
+msgstr "أدخل رقم هاتف صحيح (مثل 01712345678)."
+
+msgid "Enter a valid phone number."
+msgstr "أدخل رقم هاتف صحيح."
+
+msgid "Enter your Nagad number and the Transaction ID below"
+msgstr "أدخل رقم نقد ورقم العملية أدناه"
+
+msgid "Enter your bKash number and the Transaction ID below"
+msgstr "أدخل رقم بيكاش ورقم العملية أدناه"
+
+msgid "Enter your email and we'll send you a reset link."
+msgstr "أدخل بريدك الإلكتروني وسنرسل لك رابط إعادة التعيين."
+
+msgid "Enter your order number and the phone number you used during checkout."
+msgstr "أدخل رقم الطلب ورقم الهاتف الذي استخدمته عند الشراء."
+
+msgid "Exact"
+msgstr "المبلغ بالضبط"
+
+msgid "Fast Delivery"
+msgstr "توصيل سريع"
+
+msgid "Featured Products"
+msgstr "منتجات مميزة"
+
+msgid "Female"
+msgstr "أنثى"
+
+msgid "Filter"
+msgstr "تصفية"
+
+msgid "Filters"
+msgstr "عوامل التصفية"
+
+msgid "First name"
+msgstr "الاسم الأول"
+
+msgid "Flash Sale"
+msgstr "تخفيضات سريعة"
+
+msgid "Forgot password?"
+msgstr "نسيت كلمة المرور؟"
+
+msgid "Free"
+msgstr "مجاني"
+
+msgid "Free delivery on orders over %(amount)s"
+msgstr "توصيل مجاني للطلبات فوق %(amount)s"
+
+msgid "Free over %(amount)s"
+msgstr "مجاني فوق %(amount)s"
+
+msgid "From"
+msgstr "من"
+
+msgid "Full address (House, Road)"
+msgstr "العنوان الكامل (المنزل، الشارع)"
+
+msgid "Full name"
+msgstr "الاسم الكامل"
+
+msgid "Gender"
+msgstr "الجنس"
+
+msgid "Genuine products"
+msgstr "منتجات أصلية"
+
+msgid "Get in touch"
+msgstr "تواصل معنا"
+
+msgid "Get offers, coupons and new arrivals straight to your inbox."
+msgstr "احصل على العروض والقسائم والمنتجات الجديدة مباشرة في بريدك."
+
+msgid "Go to my account"
+msgstr "انتقل إلى حسابي"
+
+msgid "Grand Total"
+msgstr "المجموع الكلي"
+
+msgid "Hello %(name)s,"
+msgstr "مرحباً %(name)s،"
+
+msgid "Hello, %(name)s"
+msgstr "مرحباً، %(name)s"
+
+msgid "Help & Support"
+msgstr "المساعدة والدعم"
+
+msgid "Hi %(name)s,"
+msgstr "مرحباً %(name)s،"
+
+msgid "Home"
+msgstr "الرئيسية"
+
+msgid "House / Road / Details"
+msgstr "المنزل / الشارع / التفاصيل"
+
+msgid "INVOICE"
+msgstr "فاتورة"
+
+msgid "If an account exists with that email, we have sent a password reset link."
+msgstr "إذا كان هناك حساب بهذا البريد، فقد أرسلنا رابط إعادة تعيين كلمة المرور."
+
+msgid "If you didn't request this, you can ignore this email."
+msgstr "إذا لم تطلب ذلك، يمكنك تجاهل هذه الرسالة."
+
+msgid "In progress"
+msgstr "قيد التنفيذ"
+
+msgid "In stock"
+msgstr "متوفر"
+
+msgid "In stock only"
+msgstr "المتوفر فقط"
+
+msgid "Increase"
+msgstr "زيادة"
+
+msgid "Information"
+msgstr "معلومات"
+
+msgid "Inside Dhaka"
+msgstr "داخل دكا"
+
+msgid "Invalid coupon code."
+msgstr "رمز القسيمة غير صالح."
+
+msgid "Invalid product in cart."
+msgstr "منتج غير صالح في السلة."
+
+msgid "Invalid request."
+msgstr "طلب غير صالح."
+
+msgid "Invoice"
+msgstr "الفاتورة"
+
+msgid "It only takes a minute"
+msgstr "يستغرق دقيقة واحدة فقط"
+
+msgid "Item removed from cart."
+msgstr "تمت إزالة المنتج من السلة."
+
+msgid "Items"
+msgstr "المنتجات"
+
+msgid "Khulna"
+msgstr "خولنا"
+
+msgid "Language"
+msgstr "اللغة"
+
+msgid "Last 30 days"
+msgstr "آخر 30 يوماً"
+
+msgid "Last name"
+msgstr "اسم العائلة"
+
+msgid "Link expired"
+msgstr "انتهت صلاحية الرابط"
+
+msgid "Login"
+msgstr "تسجيل الدخول"
+
+msgid "Login to your %(name)s account"
+msgstr "سجّل الدخول إلى حسابك في %(name)s"
+
+msgid "Logout"
+msgstr "تسجيل الخروج"
+
+msgid "Looks like you haven't added anything yet."
+msgstr "يبدو أنك لم تضف أي شيء بعد."
+
+msgid "Low stock"
+msgstr "مخزون منخفض"
+
+msgid "Low stock in branches"
+msgstr "مخزون منخفض في الفروع"
+
+msgid "Make this my default address"
+msgstr "اجعله عنواني الافتراضي"
+
+msgid "Male"
+msgstr "ذكر"
+
+msgid "Manage"
+msgstr "إدارة"
+
+msgid "Manage orders"
+msgstr "إدارة الطلبات"
+
+msgid "Manager"
+msgstr "مدير"
+
+msgid "Max"
+msgstr "الأقصى"
+
+msgid "Menu"
+msgstr "القائمة"
+
+msgid "Message"
+msgstr "الرسالة"
+
+msgid "Method"
+msgstr "الطريقة"
+
+msgid "Min"
+msgstr "الأدنى"
+
+msgid "Minimum order ৳%(amount)s required for this coupon."
+msgstr "يلزم طلب بحد أدنى ৳%(amount)s لهذه القسيمة."
+
+msgid "My Account"
+msgstr "حسابي"
+
+msgid "My Orders"
+msgstr "طلباتي"
+
+msgid "My Profile"
+msgstr "ملفي الشخصي"
+
+msgid "My Wishlist"
+msgstr "قائمة أمنياتي"
+
+msgid "My account"
+msgstr "حسابي"
+
+msgid "My orders"
+msgstr "طلباتي"
+
+msgid "Mymensingh"
+msgstr "ميمنسينغ"
+
+msgid "Nagad"
+msgstr "نقد"
+
+msgid "Nagad payment steps:"
+msgstr "خطوات الدفع عبر نقد:"
+
+msgid "Name"
+msgstr "الاسم"
+
+msgid "Need help? Call"
+msgstr "تحتاج مساعدة؟ اتصل"
+
+msgid "New Arrivals"
+msgstr "وصل حديثاً"
+
+msgid "New here?"
+msgstr "جديد هنا؟"
+
+msgid "New sale"
+msgstr "بيع جديد"
+
+msgid "Newest"
+msgstr "الأحدث"
+
+msgid "Next"
+msgstr "التالي"
+
+msgid "No address saved yet."
+msgstr "لم يتم حفظ أي عنوان بعد."
+
+msgid "No branches yet."
+msgstr "لا توجد فروع بعد."
+
+msgid "No description yet."
+msgstr "لا يوجد وصف بعد."
+
+msgid "No order found with that order number and phone."
+msgstr "لم يتم العثور على طلب بهذا الرقم والهاتف."
+
+msgid "No orders yet"
+msgstr "لا توجد طلبات بعد"
+
+msgid "No products found"
+msgstr "لم يتم العثور على منتجات"
+
+msgid "No reviews yet. Be the first to review this product!"
+msgstr "لا توجد مراجعات بعد. كن أول من يقيّم هذا المنتج!"
+
+msgid "No sales in this period."
+msgstr "لا توجد مبيعات في هذه الفترة."
+
+msgid "No sales yet."
+msgstr "لا توجد مبيعات بعد."
+
+msgid "No sub-categories"
+msgstr "لا توجد فئات فرعية"
+
+msgid "Not enough stock for “%(name)s” in this branch (available: %(n)s)."
+msgstr "لا يوجد مخزون كافٍ من “%(name)s” في هذا الفرع (المتوفر: %(n)s)."
+
+msgid "Not enough stock in this branch"
+msgstr "لا يوجد مخزون كافٍ في هذا الفرع"
+
+msgid "Note"
+msgstr "ملاحظة"
+
+msgid "On discount"
+msgstr "عليها خصم"
+
+msgid "Online orders today"
+msgstr "الطلبات الإلكترونية اليوم"
+
+msgid "Online, last 30 days"
+msgstr "إلكتروني، آخر 30 يوماً"
+
+msgid "Open the Nagad app and tap “Send Money”"
+msgstr "افتح تطبيق نقد واضغط “Send Money”"
+
+msgid "Open the bKash app and tap “Send Money”"
+msgstr "افتح تطبيق بيكاش واضغط “Send Money”"
+
+msgid "Option"
+msgstr "خيار"
+
+msgid "Order"
+msgstr "الطلب"
+
+msgid "Order Summary"
+msgstr "ملخص الطلب"
+
+msgid "Order confirmation will be sent here (optional)"
+msgstr "سيتم إرسال تأكيد الطلب هنا (اختياري)"
+
+msgid "Order history"
+msgstr "سجل الطلب"
+
+msgid "Order note (optional)"
+msgstr "ملاحظة الطلب (اختياري)"
+
+msgid "Order number"
+msgstr "رقم الطلب"
+
+msgid "Order number, e.g. SB2610291234"
+msgstr "رقم الطلب، مثل SB2610291234"
+
+msgid "Order placed"
+msgstr "تم تقديم الطلب"
+
+msgid "Order status"
+msgstr "حالة الطلب"
+
+msgid "Orders by status"
+msgstr "الطلبات حسب الحالة"
+
+msgid "Other"
+msgstr "آخر"
+
+msgid "Others"
+msgstr "أخرى"
+
+msgid "Out of stock"
+msgstr "نفد من المخزون"
+
+msgid "Outside Dhaka"
+msgstr "خارج دكا"
+
+msgid "Page not found"
+msgstr "الصفحة غير موجودة"
+
+msgid "Paid"
+msgstr "مدفوع"
+
+msgid "Paid amount is less than the total."
+msgstr "المبلغ المدفوع أقل من الإجمالي."
+
+msgid "Password"
+msgstr "كلمة المرور"
+
+msgid "Password changed"
+msgstr "تم تغيير كلمة المرور"
+
+msgid "Password reset complete"
+msgstr "اكتملت إعادة تعيين كلمة المرور"
+
+msgid "Pay when you receive"
+msgstr "ادفع عند الاستلام"
+
+msgid "Pay with cash when the product is delivered to you."
+msgstr "ادفع نقداً عند توصيل المنتج إليك."
+
+msgid "Payment"
+msgstr "الدفع"
+
+msgid "Payment Method"
+msgstr "طريقة الدفع"
+
+msgid "Payment methods (30 days)"
+msgstr "طرق الدفع (30 يوماً)"
+
+msgid "Payment status"
+msgstr "حالة الدفع"
+
+msgid "Payment summary"
+msgstr "ملخص الدفع"
+
+msgid "Payments to verify"
+msgstr "مدفوعات بانتظار التحقق"
+
+msgid "Pending"
+msgstr "قيد الانتظار"
+
+msgid "Pending orders"
+msgstr "طلبات قيد الانتظار"
+
+msgid "Phone"
+msgstr "الهاتف"
+
+msgid "Phone used in the order"
+msgstr "الهاتف المستخدم في الطلب"
+
+msgid "Place Order"
+msgstr "تأكيد الطلب"
+
+msgid "Placed on %(date)s"
+msgstr "تم الطلب في %(date)s"
+
+msgid "Please check your internet connection and try again."
+msgstr "يرجى التحقق من اتصال الإنترنت والمحاولة مرة أخرى."
+
+msgid "Please enter a valid email."
+msgstr "يرجى إدخال بريد إلكتروني صحيح."
+
+msgid "Please enter the number you paid from."
+msgstr "يرجى إدخال الرقم الذي دفعت منه."
+
+msgid "Please give a rating and write a comment."
+msgstr "يرجى إعطاء تقييم وكتابة تعليق."
+
+msgid "Please login first."
+msgstr "يرجى تسجيل الدخول أولاً."
+
+msgid "Please select %(options)s."
+msgstr "يرجى اختيار %(options)s."
+
+msgid "Previous"
+msgstr "السابق"
+
+msgid "Price"
+msgstr "السعر"
+
+msgid "Price: High to Low"
+msgstr "السعر: من الأعلى للأقل"
+
+msgid "Price: Low to High"
+msgstr "السعر: من الأقل للأعلى"
+
+msgid "Print / Save PDF"
+msgstr "طباعة / حفظ PDF"
+
+msgid "Print receipt"
+msgstr "طباعة الإيصال"
+
+msgid "Proceed to Checkout"
+msgstr "متابعة الدفع"
+
+msgid "Processing"
+msgstr "قيد التجهيز"
+
+msgid "Product"
+msgstr "المنتج"
+
+msgid "Products"
+msgstr "المنتجات"
+
+msgid "Profile"
+msgstr "الملف الشخصي"
+
+msgid "Profile picture"
+msgstr "الصورة الشخصية"
+
+msgid "Profile updated."
+msgstr "تم تحديث الملف الشخصي."
+
+msgid "Qty"
+msgstr "الكمية"
+
+msgid "Quantity"
+msgstr "الكمية"
+
+msgid "RETURNED"
+msgstr "مُرتجع"
+
+msgid "Rajshahi"
+msgstr "راجشاهي"
+
+msgid "Rangpur"
+msgstr "رانغبور"
+
+msgid "Rating"
+msgstr "التقييم"
+
+msgid "Receipt"
+msgstr "إيصال"
+
+msgid "Receipt no. / phone / name"
+msgstr "رقم الإيصال / الهاتف / الاسم"
+
+msgid "Receipts"
+msgstr "الإيصالات"
+
+msgid "Receipts today"
+msgstr "إيصالات اليوم"
+
+msgid "Recent orders"
+msgstr "الطلبات الأخيرة"
+
+msgid "Refunded"
+msgstr "تم الاسترداد"
+
+msgid "Remove"
+msgstr "إزالة"
+
+msgid "Removed from wishlist."
+msgstr "تمت الإزالة من المفضلة."
+
+msgid "Reprint"
+msgstr "إعادة الطباعة"
+
+msgid "Request a new link"
+msgstr "اطلب رابطاً جديداً"
+
+msgid "Reset"
+msgstr "إعادة تعيين"
+
+msgid "Results for “%(q)s”"
+msgstr "نتائج “%(q)s”"
+
+msgid "Return"
+msgstr "إرجاع"
+
+msgid "Return this whole sale? Stock will be added back."
+msgstr "إرجاع البيع بالكامل؟ ستتم إعادة المخزون."
+
+msgid "Returned"
+msgstr "مُرتجع"
+
+msgid "Reviews"
+msgstr "المراجعات"
+
+msgid "Sale %(n)s returned. Stock added back to the branch."
+msgstr "تم إرجاع البيع %(n)s وإعادة المخزون إلى الفرع."
+
+msgid "Sales"
+msgstr "المبيعات"
+
+msgid "Sales — last 14 days"
+msgstr "المبيعات — آخر 14 يوماً"
+
+msgid "Sat – Thu, 10:00 AM – 8:00 PM"
+msgstr "السبت – الخميس، 10 صباحاً – 8 مساءً"
+
+msgid "Save address"
+msgstr "حفظ العنوان"
+
+msgid "Save changes"
+msgstr "حفظ التغييرات"
+
+msgid "Save this address to my account"
+msgstr "احفظ هذا العنوان في حسابي"
+
+msgid "Save your order number. You can track it anytime from"
+msgstr "احفظ رقم طلبك. يمكنك تتبعه في أي وقت من"
+
+msgid "Saving..."
+msgstr "جارٍ الحفظ..."
+
+msgid "Scan or tap a product to add it"
+msgstr "امسح أو اضغط على منتج لإضافته"
+
+msgid "Search"
+msgstr "بحث"
+
+msgid "Search in %(name)s..."
+msgstr "ابحث في %(name)s..."
+
+msgid "Search product name, or scan barcode / SKU (F2)"
+msgstr "ابحث عن اسم المنتج أو امسح الباركود / SKU (F2)"
+
+msgid "See all"
+msgstr "عرض الكل"
+
+msgid "Seller Dashboard"
+msgstr "لوحة البائع"
+
+msgid "Send"
+msgstr "أرسل"
+
+msgid "Send message"
+msgstr "إرسال الرسالة"
+
+msgid "Send reset link"
+msgstr "إرسال رابط إعادة التعيين"
+
+msgid "Send us a message"
+msgstr "أرسل لنا رسالة"
+
+msgid "Set a new password"
+msgstr "تعيين كلمة مرور جديدة"
+
+msgid "Share your experience..."
+msgstr "شارك تجربتك..."
+
+msgid "Shipped"
+msgstr "تم الشحن"
+
+msgid "Shop"
+msgstr "تسوق"
+
+msgid "Shop Now"
+msgstr "تسوق الآن"
+
+msgid "Shop POS (counter sale)"
+msgstr "نقطة البيع (البيع في المتجر)"
+
+msgid "Shop sales today"
+msgstr "مبيعات المتجر اليوم"
+
+msgid "Shop sales, last 30 days"
+msgstr "مبيعات المتجر، آخر 30 يوماً"
+
+msgid "Shopping Cart"
+msgstr "سلة التسوق"
+
+msgid "Sign up"
+msgstr "إنشاء حساب"
+
+msgid "Size"
+msgstr "المقاس"
+
+msgid "Something went wrong."
+msgstr "حدث خطأ ما."
+
+msgid "Sorry, only %(n)s pcs of “%(name)s” left in stock. Please update your cart."
+msgstr "عذراً، تبقى %(n)s قطع فقط من “%(name)s”. يرجى تحديث سلتك."
+
+msgid "Sorry, this product is out of stock."
+msgstr "عذراً، هذا المنتج غير متوفر."
+
+msgid "Sort by"
+msgstr "ترتيب حسب"
+
+msgid "Specification"
+msgstr "المواصفات"
+
+msgid "Start shopping"
+msgstr "ابدأ التسوق"
+
+msgid "Status"
+msgstr "الحالة"
+
+msgid "Sub-categories"
+msgstr "الفئات الفرعية"
+
+msgid "Subject"
+msgstr "الموضوع"
+
+msgid "Submit review"
+msgstr "إرسال المراجعة"
+
+msgid "Subscribe"
+msgstr "اشترك"
+
+msgid "Subscribe to our newsletter"
+msgstr "اشترك في نشرتنا البريدية"
+
+msgid "Subscribed successfully!"
+msgstr "تم الاشتراك بنجاح!"
+
+msgid "Subtotal"
+msgstr "المجموع الفرعي"
+
+msgid "Subtotal (%(n)s items)"
+msgstr "المجموع الفرعي (%(n)s منتجات)"
+
+msgid "Sylhet"
+msgstr "سيلهيت"
+
+msgid "Thank you for shopping with %(name)s!"
+msgstr "شكراً لتسوقك من %(name)s!"
+
+msgid "Thank you for your order at %(site_name)s!"
+msgstr "شكراً لطلبك من %(site_name)s!"
+
+msgid "Thank you for your review!"
+msgstr "شكراً لمراجعتك!"
+
+msgid "Thank you! Your order has been placed."
+msgstr "شكراً لك! تم تقديم طلبك بنجاح."
+
+msgid "Thanks! We received your message and will reply soon."
+msgstr "شكراً! استلمنا رسالتك وسنرد قريباً."
+
+msgid "The cart is empty."
+msgstr "السلة فارغة."
+
+msgid "The page you are looking for doesn't exist or has been moved."
+msgstr "الصفحة التي تبحث عنها غير موجودة أو تم نقلها."
+
+msgid "Theme & Colors"
+msgstr "السمة والألوان"
+
+msgid "This coupon has reached its usage limit."
+msgstr "وصلت هذه القسيمة إلى حد الاستخدام."
+
+msgid "This coupon is expired or inactive."
+msgstr "هذه القسيمة منتهية أو غير مفعّلة."
+
+msgid "This is a computer generated invoice."
+msgstr "هذه فاتورة صادرة إلكترونياً."
+
+msgid "This order can no longer be cancelled."
+msgstr "لم يعد بالإمكان إلغاء هذا الطلب."
+
+msgid "This order was %(status)s."
+msgstr "حالة هذا الطلب: %(status)s."
+
+msgid "This reset link is invalid or has already been used."
+msgstr "رابط إعادة التعيين هذا غير صالح أو تم استخدامه مسبقاً."
+
+msgid "Time"
+msgstr "الوقت"
+
+msgid "To"
+msgstr "إلى"
+
+msgid "Today"
+msgstr "اليوم"
+
+msgid "Today's orders"
+msgstr "طلبات اليوم"
+
+msgid "Today's sales"
+msgstr "مبيعات اليوم"
+
+msgid "Top Rated"
+msgstr "الأعلى تقييماً"
+
+msgid "Top products (30 days)"
+msgstr "أفضل المنتجات (30 يوماً)"
+
+msgid "Top products in shops (30 days)"
+msgstr "أفضل المنتجات في المتاجر (30 يوماً)"
+
+msgid "Total"
+msgstr "الإجمالي"
+
+msgid "Total orders"
+msgstr "إجمالي الطلبات"
+
+msgid "Total sales"
+msgstr "إجمالي المبيعات"
+
+msgid "Track"
+msgstr "تتبع"
+
+msgid "Track Order"
+msgstr "تتبع الطلب"
+
+msgid "Track your order"
+msgstr "تتبع طلبك"
+
+msgid "Transaction ID"
+msgstr "رقم العملية"
+
+msgid "Transaction ID is required for mobile payment."
+msgstr "رقم العملية مطلوب للدفع عبر الجوال."
+
+msgid "Transfer stock"
+msgstr "نقل المخزون"
+
+msgid "Try a different search or remove some filters."
+msgstr "جرّب بحثاً مختلفاً أو أزل بعض عوامل التصفية."
+
+msgid "Try again"
+msgstr "حاول مرة أخرى"
+
+msgid "Units in stock"
+msgstr "الوحدات في المخزون"
+
+msgid "Unpaid"
+msgstr "غير مدفوع"
+
+msgid "Unread messages"
+msgstr "رسائل غير مقروءة"
+
+msgid "Update password"
+msgstr "تحديث كلمة المرور"
+
+msgid "Username"
+msgstr "اسم المستخدم"
+
+msgid "Username or Email"
+msgstr "اسم المستخدم أو البريد الإلكتروني"
+
+msgid "Verifying"
+msgstr "قيد التحقق"
+
+msgid "View"
+msgstr "عرض"
+
+msgid "View all"
+msgstr "عرض الكل"
+
+msgid "View order"
+msgstr "عرض الطلب"
+
+msgid "We Accept"
+msgstr "نقبل"
+
+msgid "We will call you at <strong>%(phone)s</strong> to confirm your order."
+msgstr "سنتصل بك على <strong>%(phone)s</strong> لتأكيد طلبك."
+
+msgid "We will contact you at %(phone)s soon."
+msgstr "سنتواصل معك قريباً على %(phone)s."
+
+msgid "Website"
+msgstr "الموقع"
+
+msgid "Welcome back!"
+msgstr "مرحباً بعودتك!"
+
+msgid "Welcome back, %(name)s!"
+msgstr "مرحباً بعودتك، %(name)s!"
+
+msgid "Welcome to %(name)s"
+msgstr "مرحباً بك في %(name)s"
+
+msgid "Wishlist"
+msgstr "المفضلة"
+
+msgid "Write a review"
+msgstr "اكتب مراجعة"
+
+msgid "You are already subscribed."
+msgstr "أنت مشترك بالفعل."
+
+msgid "You are offline"
+msgstr "أنت غير متصل"
+
+msgid "You are seeing only your own sales."
+msgstr "أنت ترى مبيعاتك فقط."
+
+msgid "You can give at most %(p)s%% discount."
+msgstr "يمكنك منح خصم بحد أقصى %(p)s%%."
+
+msgid "You can now login with your new password."
+msgstr "يمكنك الآن تسجيل الدخول بكلمة المرور الجديدة."
+
+msgid "You cannot sell from this branch."
+msgstr "لا يمكنك البيع من هذا الفرع."
+
+msgid "You do not have permission to open this page. Ask the shop owner to give you access."
+msgstr "ليس لديك إذن لفتح هذه الصفحة. اطلب الإذن من صاحب المتجر."
+
+msgid "You have already reviewed this product."
+msgstr "لقد قيّمت هذا المنتج مسبقاً."
+
+msgid "You have no saved addresses."
+msgstr "ليس لديك عناوين محفوظة."
+
+msgid "You may also like"
+msgstr "قد يعجبك أيضاً"
+
+msgid "You requested a password reset. Click the link below to set a new password:"
+msgstr "لقد طلبت إعادة تعيين كلمة المرور. انقر على الرابط أدناه لتعيين كلمة مرور جديدة:"
+
+msgid "Your %(method)s payment (TrxID: %(trx)s) is being verified."
+msgstr "جارٍ التحقق من دفعتك عبر %(method)s (رقم العملية: %(trx)s)."
+
+msgid "Your Order"
+msgstr "طلبك"
+
+msgid "Your account has been created successfully!"
+msgstr "تم إنشاء حسابك بنجاح!"
+
+msgid "Your bKash/Nagad number"
+msgstr "رقم بيكاش/نقد الخاص بك"
+
+msgid "Your cart is empty"
+msgstr "سلتك فارغة"
+
+msgid "Your cart is empty."
+msgstr "سلتك فارغة."
+
+msgid "Your email address"
+msgstr "بريدك الإلكتروني"
+
+msgid "Your order has been cancelled."
+msgstr "تم إلغاء طلبك."
+
+msgid "Your password has been changed successfully."
+msgstr "تم تغيير كلمة المرور بنجاح."
+
+msgid "Your wishlist is empty"
+msgstr "قائمة المفضلة فارغة"
+
+msgid "bKash"
+msgstr "بيكاش"
+
+msgid "bKash payment steps:"
+msgstr "خطوات الدفع عبر بيكاش:"
+
+msgid "e.g. 01712345678"
+msgstr "مثل 01712345678"
+
+msgid "for faster checkout — or continue as guest."
+msgstr "لإتمام الشراء أسرع — أو تابع كضيف."
+
+msgid "in stock"
+msgstr "متوفر"
+
+msgid "only %(n)s left"
+msgstr "متبقي %(n)s فقط"
+
+msgid "to"
+msgstr "إلى"
+
+msgid "to write a review."
+msgstr "لكتابة مراجعة."
+
+msgid "“%(name)s” added to cart."
+msgstr "تمت إضافة “%(name)s” إلى السلة."

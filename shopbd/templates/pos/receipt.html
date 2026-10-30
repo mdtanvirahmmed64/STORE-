@@ -1,0 +1,87 @@
+{% load i18n static shop_tags %}{% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% trans "Receipt" %} {{ sale.number }}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    @page { size: 80mm auto; margin: 3mm; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #eef0f3; font-family: "Courier New", "Hind Siliguri", monospace; color: #000; }
+    .toolbar { display: flex; gap: 8px; justify-content: center; padding: 12px; flex-wrap: wrap; font-family: system-ui, "Hind Siliguri", sans-serif; }
+    .toolbar a, .toolbar button { background: #1a2b49; color: #fff; border: 0; padding: 10px 16px; border-radius: 8px; font-size: 15px; text-decoration: none; cursor: pointer; font-family: inherit; }
+    .toolbar .primary { background: #f85606; }
+    .paper { width: 80mm; max-width: 100%; margin: 0 auto 24px; background: #fff; padding: 5mm 4mm; font-size: 12.5px; line-height: 1.35; box-shadow: 0 2px 12px rgba(0,0,0,.12); }
+    .c { text-align: center; }
+    .shop { font-size: 18px; font-weight: 700; font-family: system-ui, "Hind Siliguri", sans-serif; }
+    .muted { color: #333; }
+    hr { border: 0; border-top: 1px dashed #000; margin: 6px 0; }
+    table { width: 100%; border-collapse: collapse; }
+    td { vertical-align: top; padding: 2px 0; }
+    .r { text-align: end; white-space: nowrap; }
+    .item-name { font-weight: 700; }
+    .tot td { padding: 1px 0; }
+    .grand td { font-size: 15px; font-weight: 700; border-top: 1px solid #000; padding-top: 4px; }
+    .stamp { border: 2px solid #c00; color: #c00; font-weight: 700; text-align: center; padding: 4px; margin: 6px 0; font-size: 15px; }
+    .bar { font-family: "Libre Barcode 39", monospace; }
+    @media print {
+      body { background: #fff; }
+      .toolbar { display: none; }
+      .paper { box-shadow: none; margin: 0; padding: 0; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <button class="primary" onclick="printReceipt()">🖨 {% trans "Print receipt" %}</button>
+    <a href="{% url 'pos:terminal' %}?branch={{ sale.branch_id }}">➕ {% trans "New sale" %}</a>
+    <a href="{% url 'pos:sales' %}?branch={{ sale.branch_id }}">🧾 {% trans "Sales" %}</a>
+  </div>
+
+  <div class="paper">
+    <div class="c">
+      {% if site.logo %}<img src="{{ site.logo.url }}" alt="" style="max-height:40px;max-width:60%;margin-bottom:4px">{% endif %}
+      <div class="shop">{{ site.site_name }}</div>
+      <div>{{ sale.branch.name }}</div>
+      {% if sale.branch.address %}<div class="muted">{{ sale.branch.address }}</div>{% endif %}
+      {% if sale.branch.phone %}<div class="muted" dir="ltr">{{ sale.branch.phone }}</div>{% endif %}
+    </div>
+    <hr>
+    <table>
+      <tr><td>{% trans "Receipt" %}:</td><td class="r"><b>{{ sale.number }}</b></td></tr>
+      <tr><td>{% trans "Date" %}:</td><td class="r">{{ sale.created_at|date:"d/m/Y h:i A" }}</td></tr>
+      <tr><td>{% trans "Cashier" %}:</td><td class="r">{{ sale.cashier.first_name|default:sale.cashier.username|default:"-" }}</td></tr>
+      {% if sale.customer_name or sale.customer_phone %}<tr><td>{% trans "Customer" %}:</td><td class="r">{{ sale.customer_name }} <span dir="ltr">{{ sale.customer_phone }}</span></td></tr>{% endif %}
+    </table>
+    {% if sale.status == "returned" %}<div class="stamp">{% trans "RETURNED" %}</div>{% endif %}
+    <hr>
+    <table>
+      {% for item in sale.items.all %}
+      <tr><td colspan="2" class="item-name">{% if item.product %}{{ item.product|tr:"name" }}{% else %}{{ item.product_name }}{% endif %}</td></tr>
+      {% if item.variation %}<tr><td colspan="2" class="muted">{{ item.variation }}</td></tr>{% endif %}
+      <tr><td>{{ item.quantity }} × {{ item.unit_price|taka }}</td><td class="r">{{ item.line_total|taka }}</td></tr>
+      {% endfor %}
+    </table>
+    <hr>
+    <table class="tot">
+      <tr><td>{% trans "Subtotal" %} ({{ sale.item_count }})</td><td class="r">{{ sale.subtotal|taka }}</td></tr>
+      {% if sale.discount %}<tr><td>{% trans "Discount" %}</td><td class="r">−{{ sale.discount|taka }}</td></tr>{% endif %}
+      <tr class="grand"><td>{% trans "Total" %}</td><td class="r">{{ sale.total|taka }}</td></tr>
+      <tr><td>{% trans "Paid" %} ({{ sale.get_payment_method_display }})</td><td class="r">{{ sale.paid_amount|taka }}</td></tr>
+      {% if sale.change_amount %}<tr><td>{% trans "Change" %}</td><td class="r">{{ sale.change_amount|taka }}</td></tr>{% endif %}
+      {% if sale.transaction_id %}<tr><td>TrxID</td><td class="r">{{ sale.transaction_id }}</td></tr>{% endif %}
+    </table>
+    <hr>
+    <div class="c">{{ sale.branch.receipt_footer }}</div>
+    <div class="c muted" style="margin-top:4px">{{ request.get_host }}</div>
+    <div class="c" style="margin-top:6px;font-size:16px;letter-spacing:2px">*{{ sale.number }}*</div>
+  </div>
+
+  <script>
+    function printReceipt() {
+      if (window.AndroidApp && window.AndroidApp.print) { window.AndroidApp.print(); } else { window.print(); }
+    }
+    {% if autoprint %}window.addEventListener("load", function () { setTimeout(printReceipt, 400); });{% endif %}
+  </script>
+</body>
+</html>

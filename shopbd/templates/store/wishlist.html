@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "My Wishlist" %} | {{ site.site_name }}{% endblock %}
+{% block content %}
+<div class="container">
+  <h1 class="page-title"><i class="fa-regular fa-heart" style="color:var(--danger)"></i> {% trans "My Wishlist" %}</h1>
+  <section class="card">
+    {% if items %}
+    <div class="product-grid">
+      {% for w in items %}{% with p=w.product remove_on_unwish=True %}{% include "partials/product_card.html" %}{% endwith %}{% endfor %}
+    </div>
+    {% else %}
+    <div class="empty"><i class="fa-regular fa-heart"></i><h3>{% trans "Your wishlist is empty" %}</h3>
+      <a href="{% url 'store:product_list' %}" class="btn btn-primary">{% trans "Start shopping" %}</a></div>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

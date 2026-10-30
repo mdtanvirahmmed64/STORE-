@@ -1,0 +1,39 @@
+{% extends "accounts/account_base.html" %}
+{% load i18n shop_tags %}
+{% block title %}{% trans "My Orders" %} | {{ site.site_name }}{% endblock %}
+{% block account_content %}
+<section class="card">
+  <div class="section-head">
+    <h2><i class="fa-solid fa-box"></i> {% trans "My Orders" %}</h2>
+    <form method="get">
+      <select name="status" class="form-control js-filter-auto" style="width:auto">
+        <option value="">{% trans "All orders" %}</option>
+        {% for key, label in status_choices %}<option value="{{ key }}" {% if status == key %}selected{% endif %}>{{ label }}</option>{% endfor %}
+      </select>
+    </form>
+  </div>
+  {% if orders %}
+  <div class="table-wrap">
+    <table class="table">
+      <thead><tr><th>{% trans "Order" %}</th><th>{% trans "Date" %}</th><th>{% trans "Items" %}</th><th>{% trans "Total" %}</th><th>{% trans "Payment" %}</th><th>{% trans "Status" %}</th><th></th></tr></thead>
+      <tbody>
+        {% for o in orders %}
+        <tr>
+          <td><strong>{{ o.order_number }}</strong></td>
+          <td>{{ o.created_at|date:"d M Y" }}</td>
+          <td>{{ o.items.all|length }}</td>
+          <td>{{ o.total|taka }}</td>
+          <td><span class="badge badge-{{ o.payment_status|status_color }}">{{ o.get_payment_status_display }}</span></td>
+          <td><span class="badge badge-{{ o.status|status_color }}">{{ o.get_status_display }}</span></td>
+          <td><a href="{% url 'orders:detail' o.order_number %}" class="btn btn-outline btn-sm">{% trans "View" %}</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% include "partials/pagination.html" %}
+  {% else %}
+  <div class="empty"><i class="fa-solid fa-box-open"></i><h3>{% trans "No orders yet" %}</h3><a href="{% url 'store:product_list' %}" class="btn btn-primary">{% trans "Start shopping" %}</a></div>
+  {% endif %}
+</section>
+{% endblock %}

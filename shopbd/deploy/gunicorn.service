@@ -1,0 +1,15 @@
+# /etc/systemd/system/shopbd.service
+[Unit]
+Description=ShopBD Django (gunicorn)
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/shopbd
+EnvironmentFile=/var/www/shopbd/.env
+ExecStart=/var/www/shopbd/venv/bin/gunicorn config.wsgi:application --workers 3 --bind unix:/run/shopbd.sock
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

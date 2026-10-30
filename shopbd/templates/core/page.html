@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n shop_tags %}
+{% block title %}{{ page|tr:"title" }} | {{ site.site_name }}{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="breadcrumb"><a href="{% url 'core:home' %}">{% trans "Home" %}</a><span>{{ page|tr:"title" }}</span></div>
+  <article class="card card-body" style="max-width:900px;margin:auto">
+    <h1>{{ page|tr:"title" }}</h1>
+    <div>{{ page|tr:"content"|safe }}</div>
+  </article>
+</div>
+{% endblock %}

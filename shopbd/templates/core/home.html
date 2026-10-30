@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% load static i18n shop_tags %}
+{% block content %}
+<div class="container">
+  <section class="hero">
+    <aside class="hero-cats">
+      {% for cat in categories|slice:":11" %}
+      <a href="{{ cat.get_absolute_url }}"><i class="fa-solid {{ cat.icon|default:'fa-tag' }}"></i> {{ cat|tr:"name" }}</a>
+      {% endfor %}
+    </aside>
+
+    <div class="slider">
+      {% for s in sliders %}
+      <div class="slide{% if forloop.first %} active{% endif %}">
+        <a href="{{ s.link|default:'#' }}"><img src="{{ s.image.url }}" alt="{{ s|tr:'title' }}"></a>
+        <div class="slide-caption">
+          <h2>{{ s|tr:"title" }}</h2>
+          {% with sub=s|tr:"subtitle" %}{% if sub %}<p>{{ sub }}</p>{% endif %}{% endwith %}
+          {% if s.link %}<a href="{{ s.link }}" class="btn btn-accent">{% with b=s|tr:"button_text" %}{% if b %}{{ b }}{% else %}{% trans "Shop Now" %}{% endif %}{% endwith %}</a>{% endif %}
+        </div>
+      </div>
+      {% empty %}
+      <div class="slide active">
+        <div class="slide-caption"><h2>{% blocktrans with name=site.site_name %}Welcome to {{ name }}{% endblocktrans %}</h2></div>
+      </div>
+      {% endfor %}
+      {% if sliders|length > 1 %}
+      <button class="slider-arrow prev" aria-label="{% trans 'Previous' %}"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="slider-arrow next" aria-label="{% trans 'Next' %}"><i class="fa-solid fa-chevron-right"></i></button>
+      <div class="slider-dots"></div>
+      {% endif %}
+    </div>
+
+    <div class="hero-side">
+      {% for b in side_banners %}
+      <a href="{{ b.link|default:'#' }}" class="side-banner"><img src="{{ b.image.url }}" alt="{{ b|tr:'title' }}"><span>{{ b|tr:"title" }}</span></a>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="feature"><i class="fa-solid fa-truck-fast"></i><div><strong>{% trans "Fast Delivery" %}</strong><span>{% trans "All over Bangladesh" %}</span></div></div>
+    <div class="feature"><i class="fa-solid fa-money-bill-wave"></i><div><strong>{% trans "Cash on Delivery" %}</strong><span>{% trans "Pay when you receive" %}</span></div></div>
+    <div class="feature"><i class="fa-solid fa-rotate-left"></i><div><strong>{% trans "Easy Return" %}</strong><span>{% trans "7 days return policy" %}</span></div></div>
+    <div class="feature"><i class="fa-solid fa-shield-halved"></i><div><strong>{% trans "100% Authentic" %}</strong><span>{% trans "Genuine products" %}</span></div></div>
+  </section>
+
+  {% if flash_products %}
+  <section class="section card">
+    <div class="section-head flash-head">
+      <h2><i class="fa-solid fa-bolt"></i> {% trans "Flash Sale" %}</h2>
+      <div class="countdown" data-countdown="{{ flash_end|date:'c' }}"></div>
+      <a href="{% url 'store:product_list' %}?filter=flash" class="btn btn-outline btn-sm">{% trans "See all" %}</a>
+    </div>
+    <div class="product-row">
+      {% for p in flash_products %}{% include "partials/product_card.html" %}{% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <section class="section card">
+    <div class="section-head"><h2><i class="fa-solid fa-layer-group"></i> {% trans "Categories" %}</h2></div>
+    <div class="cat-grid">
+      {% for cat in categories %}
+      <a href="{{ cat.get_absolute_url }}" class="cat-item">
+        <span class="cat-icon">{% if cat.image %}<img src="{{ cat.image.url }}" alt="">{% else %}<i class="fa-solid {{ cat.icon|default:'fa-tag' }}"></i>{% endif %}</span>
+        {{ cat|tr:"name" }}
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+
+  {% if featured_products %}
+  <section class="section card">
+    <div class="section-head">
+      <h2><i class="fa-solid fa-star"></i> {% trans "Featured Products" %}</h2>
+      <a href="{% url 'store:product_list' %}?filter=featured" class="btn btn-outline btn-sm">{% trans "See all" %}</a>
+    </div>
+    <div class="product-grid">
+      {% for p in featured_products %}{% include "partials/product_card.html" %}{% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if middle_banners %}
+  <section class="section middle-banners">
+    {% for b in middle_banners %}
+    <a href="{{ b.link|default:'#' }}"><img src="{{ b.image.url }}" alt="{{ b|tr:'title' }}"><span>{{ b|tr:"title" }}<small>{{ b|tr:"subtitle" }}</small></span></a>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  {% if best_sellers %}
+  <section class="section card">
+    <div class="section-head">
+      <h2><i class="fa-solid fa-fire"></i> {% trans "Best Sellers" %}</h2>
+      <a href="{% url 'store:product_list' %}?sort=popular" class="btn btn-outline btn-sm">{% trans "See all" %}</a>
+    </div>
+    <div class="product-row">
+      {% for p in best_sellers %}{% include "partials/product_card.html" %}{% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% for cat, items in home_categories %}
+  <section class="section card">
+    <div class="section-head">
+      <h2><i class="fa-solid {{ cat.icon|default:'fa-tag' }}"></i> {{ cat|tr:"name" }}</h2>
+      <a href="{{ cat.get_absolute_url }}" class="btn btn-outline btn-sm">{% trans "See all" %}</a>
+    </div>
+    <div class="product-row">
+      {% for p in items %}{% include "partials/product_card.html" %}{% endfor %}
+    </div>
+  </section>
+  {% endfor %}
+
+  {% if new_arrivals %}
+  <section class="section card">
+    <div class="section-head">
+      <h2><i class="fa-solid fa-wand-magic-sparkles"></i> {% trans "New Arrivals" %}</h2>
+      <a href="{% url 'store:product_list' %}?filter=new" class="btn btn-outline btn-sm">{% trans "See all" %}</a>
+    </div>
+    <div class="product-grid">
+      {% for p in new_arrivals %}{% include "partials/product_card.html" %}{% endfor %}
+    </div>
+  </section>
+  {% endif %}
+</div>
+{% endblock %}

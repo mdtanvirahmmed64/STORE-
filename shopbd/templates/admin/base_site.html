@@ -1,0 +1,11 @@
+{% extends "admin/base.html" %}
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:"ShopBD Admin" }}{% endblock %}
+{% block branding %}<div id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:"ShopBD Admin" }}</a></div>{% endblock %}
+{% block userlinks %}
+<a href="{% url 'admin:core_themesetting_changelist' %}">🎨 Theme &amp; Colors</a> /
+<a href="{% url 'admin:core_sitesetting_changelist' %}">⚙ Site Settings</a> /
+<a href="{% url 'core:staff_dashboard' %}">📊 Seller Dashboard</a> /
+<a href="{% url 'pos:terminal' %}">🧾 POS</a> /
+<a href="{% url 'pos:dashboard' %}">🏬 Branches</a> /
+{{ block.super }}
+{% endblock %}

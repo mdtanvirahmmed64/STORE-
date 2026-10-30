@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Order" %} {{ order.order_number }} | {{ site.site_name }}{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="breadcrumb">
+    <a href="{% url 'core:home' %}">{% trans "Home" %}</a>
+    {% if user.is_authenticated %}<span><a href="{% url 'orders:my_orders' %}">{% trans "My Orders" %}</a></span>{% endif %}
+    <span>{{ order.order_number }}</span>
+  </div>
+  {% include "orders/_order_body.html" %}
+</div>
+{% endblock %}

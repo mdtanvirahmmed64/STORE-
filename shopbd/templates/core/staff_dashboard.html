@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load i18n shop_tags %}
+{% block title %}{% trans "Seller Dashboard" %} | {{ site.site_name }}{% endblock %}
+{% block content %}
+<div class="container">
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem">
+    <h1 class="page-title"><i class="fa-solid fa-chart-line" style="color:var(--primary)"></i> {% trans "Seller Dashboard" %}</h1>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+      <a href="{% url 'admin:store_product_add' %}" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> {% trans "Add product" %}</a>
+      <a href="{% url 'admin:orders_order_changelist' %}" class="btn btn-dark btn-sm"><i class="fa-solid fa-box"></i> {% trans "Manage orders" %}</a>
+      <a href="{% url 'pos:terminal' %}" class="btn btn-dark btn-sm"><i class="fa-solid fa-cash-register"></i> {% trans "Shop POS (counter sale)" %}</a>
+      <a href="{% url 'pos:dashboard' %}" class="btn btn-outline btn-sm"><i class="fa-solid fa-code-branch"></i> {% trans "Branch dashboard" %}</a>
+      <a href="{% url 'admin:core_themesetting_changelist' %}" class="btn btn-outline btn-sm"><i class="fa-solid fa-palette"></i> {% trans "Theme & Colors" %}</a>
+      <a href="{% url 'admin:index' %}" class="btn btn-outline btn-sm"><i class="fa-solid fa-screwdriver-wrench"></i> {% trans "Admin Panel" %}</a>
+    </div>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat"><span class="ic"><i class="fa-solid fa-bangladeshi-taka-sign"></i></span><div><strong>{{ today_sales|taka }}</strong><span>{% trans "Today's sales" %}</span></div></div>
+    <div class="stat"><span class="ic blue"><i class="fa-solid fa-receipt"></i></span><div><strong>{{ today_orders }}</strong><span>{% trans "Today's orders" %}</span></div></div>
+    <div class="stat"><span class="ic green"><i class="fa-solid fa-sack-dollar"></i></span><div><strong>{{ month_sales|taka }}</strong><span>{% trans "Last 30 days" %}</span></div></div>
+    <div class="stat"><span class="ic yellow"><i class="fa-solid fa-hourglass-half"></i></span><div><strong>{{ pending_orders }}</strong><span>{% trans "Pending orders" %}</span></div></div>
+    <div class="stat"><span class="ic"><i class="fa-solid fa-mobile-screen"></i></span><div><strong>{{ payment_verify }}</strong><span>{% trans "Payments to verify" %}</span></div></div>
+    <div class="stat"><span class="ic blue"><i class="fa-solid fa-users"></i></span><div><strong>{{ customers }}</strong><span>{% trans "Customers" %}</span></div></div>
+    <div class="stat"><span class="ic green"><i class="fa-solid fa-cubes"></i></span><div><strong>{{ product_count }}</strong><span>{% trans "Products" %}</span></div></div>
+    <div class="stat"><span class="ic green"><i class="fa-solid fa-store"></i></span><div><strong>{{ shop_today|taka }}</strong><span>{% trans "Shop sales today" %} ({{ shop_today_n }})</span></div></div>
+    <div class="stat"><span class="ic yellow"><i class="fa-regular fa-envelope"></i></span><div><strong>{{ unread_messages }}</strong><span>{% trans "Unread messages" %}</span></div></div>
+  </div>
+
+  <section class="card card-body section">
+    <h3 class="card-title">{% trans "Sales — last 14 days" %}</h3>
+    <div class="bar-chart" dir="ltr">
+      {% for c in chart %}
+      <div class="col" title="{{ c.label }}: ৳{{ c.total|floatformat:0 }} ({{ c.n }})">
+        <span class="b" style="height:{{ c.pct }}%"></span><small>{{ c.label }}</small>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <div class="two-col section">
+    <section class="card">
+      <div class="section-head"><h2><i class="fa-solid fa-clock-rotate-left"></i> {% trans "Recent orders" %}</h2></div>
+      <div class="table-wrap"><table class="table">
+        <thead><tr><th>{% trans "Order" %}</th><th>{% trans "Customer" %}</th><th>{% trans "Total" %}</th><th>{% trans "Payment" %}</th><th>{% trans "Status" %}</th></tr></thead>
+        <tbody>
+          {% for o in recent_orders %}
+          <tr><td><a href="{% url 'admin:orders_order_change' o.pk %}" style="color:var(--primary);font-weight:600">{{ o.order_number }}</a><br><small class="muted">{{ o.created_at|date:"d M, h:i A" }}</small></td>
+            <td>{{ o.full_name }}<br><small class="muted" dir="ltr">{{ o.phone }}</small></td>
+            <td>{{ o.total|taka }}</td>
+            <td>{{ o.get_payment_method_display }}<br><span class="badge badge-{{ o.payment_status|status_color }}">{{ o.get_payment_status_display }}</span></td>
+            <td><span class="badge badge-{{ o.status|status_color }}">{{ o.get_status_display }}</span></td></tr>
+          {% empty %}<tr><td colspan="5" class="muted">{% trans "No orders yet" %}</td></tr>{% endfor %}
+        </tbody>
+      </table></div>
+    </section>
+    <div>
+      <section class="card card-body mb-2">
+        <h3 class="card-title">{% trans "Top products (30 days)" %}</h3>
+        {% for t in top_products %}<div class="summary-row"><span>{{ t.product_name|truncatechars:30 }}</span><strong>{% blocktrans with n=t.qty %}{{ n }} sold{% endblocktrans %}</strong></div>
+        {% empty %}<p class="muted">{% trans "No sales yet." %}</p>{% endfor %}
+      </section>
+      <section class="card card-body mb-2">
+        <h3 class="card-title" style="color:var(--danger)"><i class="fa-solid fa-triangle-exclamation"></i> {% trans "Low stock" %}</h3>
+        {% for p in low_stock %}<div class="summary-row"><a href="{% url 'admin:store_product_change' p.pk %}">{{ p|tr:"name"|truncatechars:30 }}</a><span class="badge badge-{% if p.stock == 0 %}danger{% else %}warning{% endif %}">{% blocktrans with n=p.stock %}{{ n }} left{% endblocktrans %}</span></div>
+        {% empty %}<p class="muted">{% trans "All products are well stocked." %}</p>{% endfor %}
+      </section>
+      <section class="card card-body">
+        <h3 class="card-title">{% trans "Orders by status" %}</h3>
+        {% for s in status_counts %}<div class="summary-row"><span class="badge badge-{{ s.status|status_color }}">{{ s.label }}</span><strong>{{ s.n }}</strong></div>{% endfor %}
+      </section>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,1315 @@
+# ShopBD — Urdu translation.
+# Edit the msgstr lines, then run:  python manage.py compile_translations
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: ur\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "%(n)s items found"
+msgstr "%(n)s اشیاء ملیں"
+
+msgid "%(n)s left"
+msgstr "%(n)s باقی"
+
+msgid "%(n)s ratings"
+msgstr "%(n)s ریٹنگز"
+
+msgid "%(n)s reviews"
+msgstr "%(n)s جائزے"
+
+msgid "%(n)s sold"
+msgstr "%(n)s فروخت"
+
+msgid "%(price)s each"
+msgstr "%(price)s فی عدد"
+
+msgid "& up"
+msgstr "اور اس سے زیادہ"
+
+msgid "100%% Authentic"
+msgstr "100%% اصلی"
+
+msgid "100%% authentic product"
+msgstr "100%% اصلی پروڈکٹ"
+
+msgid "1–2 days"
+msgstr "1–2 دن"
+
+msgid "3–5 days"
+msgstr "3–5 دن"
+
+msgid "7 days easy return"
+msgstr "7 دن میں آسان واپسی"
+
+msgid "7 days return policy"
+msgstr "7 دن کی واپسی پالیسی"
+
+msgid "<strong>%(code)s</strong> applied"
+msgstr "<strong>%(code)s</strong> لاگو ہو گیا"
+
+msgid "Access denied"
+msgstr "رسائی نہیں"
+
+msgid "Account"
+msgstr "اکاؤنٹ"
+
+msgid "Add address"
+msgstr "پتہ شامل کریں"
+
+msgid "Add branch"
+msgstr "شاخ شامل کریں"
+
+msgid "Add more for free delivery over %(amount)s"
+msgstr "%(amount)s سے زیادہ پر مفت ڈیلیوری کے لیے مزید شامل کریں"
+
+msgid "Add new"
+msgstr "نیا شامل کریں"
+
+msgid "Add new address"
+msgstr "نیا پتہ شامل کریں"
+
+msgid "Add product"
+msgstr "پروڈکٹ شامل کریں"
+
+msgid "Add to Cart"
+msgstr "کارٹ میں ڈالیں"
+
+msgid "Add to cart"
+msgstr "کارٹ میں ڈالیں"
+
+msgid "Added to wishlist."
+msgstr "وش لسٹ میں شامل ہو گیا۔"
+
+msgid "Address Book"
+msgstr "پتوں کی کتاب"
+
+msgid "Address deleted."
+msgstr "پتہ حذف کر دیا گیا۔"
+
+msgid "Address saved."
+msgstr "پتہ محفوظ ہو گیا۔"
+
+msgid "Addresses"
+msgstr "پتے"
+
+msgid "Admin Panel"
+msgstr "ایڈمن پینل"
+
+msgid "All Products"
+msgstr "تمام پروڈکٹس"
+
+msgid "All in %(name)s"
+msgstr "%(name)s میں سب"
+
+msgid "All orders"
+msgstr "تمام آرڈرز"
+
+msgid "All over Bangladesh"
+msgstr "پورے بنگلہ دیش میں"
+
+msgid "All products are well stocked."
+msgstr "تمام پروڈکٹس کا کافی اسٹاک ہے۔"
+
+msgid "All rights reserved."
+msgstr "جملہ حقوق محفوظ ہیں۔"
+
+msgid "Already have an account?"
+msgstr "پہلے سے اکاؤنٹ ہے؟"
+
+msgid "An account with this email already exists."
+msgstr "اس ای میل سے پہلے ہی ایک اکاؤنٹ موجود ہے۔"
+
+msgid "Apply"
+msgstr "لاگو کریں"
+
+msgid "Are you sure you want to cancel this order?"
+msgstr "کیا آپ واقعی یہ آرڈر منسوخ کرنا چاہتے ہیں؟"
+
+msgid "Area"
+msgstr "علاقہ"
+
+msgid "Average sale"
+msgstr "اوسط فروخت"
+
+msgid "Back"
+msgstr "واپس"
+
+msgid "Back to home"
+msgstr "ہوم پر واپس جائیں"
+
+msgid "Back to top"
+msgstr "اوپر جائیں"
+
+msgid "Barishal"
+msgstr "باریشال"
+
+msgid "Best Sellers"
+msgstr "سب سے زیادہ فروخت"
+
+msgid "Best Selling"
+msgstr "سب سے زیادہ فروخت"
+
+msgid "Bill / Ship to"
+msgstr "بل / ترسیل"
+
+msgid "Branch"
+msgstr "شاخ"
+
+msgid "Branch dashboard"
+msgstr "شاخ ڈیش بورڈ"
+
+msgid "Branches"
+msgstr "شاخیں"
+
+msgid "Brand"
+msgstr "برانڈ"
+
+msgid "Browse all products"
+msgstr "تمام پروڈکٹس دیکھیں"
+
+msgid "Buy Now"
+msgstr "ابھی خریدیں"
+
+msgid "By placing your order you agree to our terms & conditions."
+msgstr "آرڈر دے کر آپ ہماری شرائط و ضوابط سے متفق ہیں۔"
+
+msgid "Cancel"
+msgstr "منسوخ کریں"
+
+msgid "Cancel order"
+msgstr "آرڈر منسوخ کریں"
+
+msgid "Cancelled"
+msgstr "منسوخ"
+
+msgid "Card"
+msgstr "کارڈ"
+
+msgid "Cart"
+msgstr "کارٹ"
+
+msgid "Cash"
+msgstr "نقد"
+
+msgid "Cash on Delivery"
+msgstr "کیش آن ڈیلیوری"
+
+msgid "Cash on Delivery available"
+msgstr "کیش آن ڈیلیوری دستیاب ہے"
+
+msgid "Cash received"
+msgstr "وصول شدہ نقد"
+
+msgid "Cashier"
+msgstr "کیشیئر"
+
+msgid "Cashiers today"
+msgstr "آج کے کیشیئر"
+
+msgid "Categories"
+msgstr "زمرے"
+
+msgid "Change"
+msgstr "واپسی"
+
+msgid "Change Password"
+msgstr "پاس ورڈ تبدیل کریں"
+
+msgid "Change password"
+msgstr "پاس ورڈ تبدیل کریں"
+
+msgid "Change to return"
+msgstr "واپس دینا ہے"
+
+msgid "Chattogram"
+msgstr "چٹاگانگ"
+
+msgid "Check your email"
+msgstr "اپنی ای میل دیکھیں"
+
+msgid "Checkout"
+msgstr "چیک آؤٹ"
+
+msgid "Choose a saved address:"
+msgstr "محفوظ پتہ منتخب کریں:"
+
+msgid "Choose language"
+msgstr "زبان منتخب کریں"
+
+msgid "Choose options"
+msgstr "آپشن منتخب کریں"
+
+msgid "City / District"
+msgstr "شہر / ضلع"
+
+msgid "Clear"
+msgstr "صاف کریں"
+
+msgid "Clear the cart?"
+msgstr "کارٹ صاف کریں؟"
+
+msgid "Close"
+msgstr "بند کریں"
+
+msgid "Color"
+msgstr "رنگ"
+
+msgid "Complete sale & print receipt"
+msgstr "فروخت مکمل کریں اور رسید پرنٹ کریں"
+
+msgid "Completed"
+msgstr "مکمل"
+
+msgid "Confirm password"
+msgstr "پاس ورڈ کی تصدیق کریں"
+
+msgid "Confirmed"
+msgstr "تصدیق شدہ"
+
+msgid "Contact Us"
+msgstr "ہم سے رابطہ کریں"
+
+msgid "Contact us"
+msgstr "ہم سے رابطہ کریں"
+
+msgid "Continue shopping"
+msgstr "خریداری جاری رکھیں"
+
+msgid "Coupon"
+msgstr "کوپن"
+
+msgid "Coupon applied successfully!"
+msgstr "کوپن کامیابی سے لاگو ہو گیا!"
+
+msgid "Coupon code"
+msgstr "کوپن کوڈ"
+
+msgid "Coupon removed."
+msgstr "کوپن ہٹا دیا گیا۔"
+
+msgid "Create account"
+msgstr "اکاؤنٹ بنائیں"
+
+msgid "Create an account"
+msgstr "نیا اکاؤنٹ بنائیں"
+
+msgid "Create your account"
+msgstr "اپنا اکاؤنٹ بنائیں"
+
+msgid "Customer"
+msgstr "گاہک"
+
+msgid "Customer (optional)"
+msgstr "گاہک (اختیاری)"
+
+msgid "Customer Care"
+msgstr "کسٹمر کیئر"
+
+msgid "Customers"
+msgstr "گاہک"
+
+msgid "Dashboard"
+msgstr "ڈیش بورڈ"
+
+msgid "Date"
+msgstr "تاریخ"
+
+msgid "Date of birth"
+msgstr "تاریخ پیدائش"
+
+msgid "Decrease"
+msgstr "کم کریں"
+
+msgid "Default"
+msgstr "ڈیفالٹ"
+
+msgid "Default address"
+msgstr "ڈیفالٹ پتہ"
+
+msgid "Delete"
+msgstr "حذف کریں"
+
+msgid "Delete this address?"
+msgstr "یہ پتہ حذف کریں؟"
+
+msgid "Delivered"
+msgstr "ڈیلیور ہو گیا"
+
+msgid "Delivery"
+msgstr "ڈیلیوری"
+
+msgid "Delivery (inside Dhaka)"
+msgstr "ڈیلیوری (ڈھاکہ کے اندر)"
+
+msgid "Delivery Information"
+msgstr "ڈیلیوری کی معلومات"
+
+msgid "Delivery address"
+msgstr "ڈیلیوری کا پتہ"
+
+msgid "Delivery area"
+msgstr "ڈیلیوری کا علاقہ"
+
+msgid "Delivery charge"
+msgstr "ڈیلیوری چارج"
+
+msgid "Description"
+msgstr "تفصیل"
+
+msgid "Dhaka"
+msgstr "ڈھاکہ"
+
+msgid "Discount"
+msgstr "رعایت"
+
+msgid "Discount given"
+msgstr "دی گئی رعایت"
+
+msgid "Discount type"
+msgstr "رعایت کی قسم"
+
+msgid "Division"
+msgstr "ڈویژن"
+
+msgid "Easy Return"
+msgstr "آسان واپسی"
+
+msgid "Edit"
+msgstr "ترمیم کریں"
+
+msgid "Edit address"
+msgstr "پتہ میں ترمیم کریں"
+
+msgid "Email"
+msgstr "ای میل"
+
+msgid "Ends in"
+msgstr "ختم ہونے میں"
+
+msgid "Enter a valid phone number (e.g. 01712345678)."
+msgstr "درست فون نمبر درج کریں (مثلاً 01712345678)۔"
+
+msgid "Enter a valid phone number."
+msgstr "درست فون نمبر درج کریں۔"
+
+msgid "Enter your Nagad number and the Transaction ID below"
+msgstr "نیچے اپنا نگد نمبر اور ٹرانزیکشن آئی ڈی درج کریں"
+
+msgid "Enter your bKash number and the Transaction ID below"
+msgstr "نیچے اپنا بیکاش نمبر اور ٹرانزیکشن آئی ڈی درج کریں"
+
+msgid "Enter your email and we'll send you a reset link."
+msgstr "اپنی ای میل درج کریں، ہم ری سیٹ لنک بھیجیں گے۔"
+
+msgid "Enter your order number and the phone number you used during checkout."
+msgstr "اپنا آرڈر نمبر اور چیک آؤٹ میں استعمال کیا گیا فون نمبر درج کریں۔"
+
+msgid "Exact"
+msgstr "پوری رقم"
+
+msgid "Fast Delivery"
+msgstr "تیز ڈیلیوری"
+
+msgid "Featured Products"
+msgstr "نمایاں پروڈکٹس"
+
+msgid "Female"
+msgstr "خاتون"
+
+msgid "Filter"
+msgstr "فلٹر"
+
+msgid "Filters"
+msgstr "فلٹرز"
+
+msgid "First name"
+msgstr "پہلا نام"
+
+msgid "Flash Sale"
+msgstr "فلیش سیل"
+
+msgid "Forgot password?"
+msgstr "پاس ورڈ بھول گئے؟"
+
+msgid "Free"
+msgstr "مفت"
+
+msgid "Free delivery on orders over %(amount)s"
+msgstr "%(amount)s سے زیادہ کے آرڈر پر مفت ڈیلیوری"
+
+msgid "Free over %(amount)s"
+msgstr "%(amount)s سے زیادہ پر مفت"
+
+msgid "From"
+msgstr "سے"
+
+msgid "Full address (House, Road)"
+msgstr "مکمل پتہ (مکان، سڑک)"
+
+msgid "Full name"
+msgstr "پورا نام"
+
+msgid "Gender"
+msgstr "جنس"
+
+msgid "Genuine products"
+msgstr "اصلی پروڈکٹس"
+
+msgid "Get in touch"
+msgstr "رابطے میں رہیں"
+
+msgid "Get offers, coupons and new arrivals straight to your inbox."
+msgstr "آفرز، کوپن اور نئی پروڈکٹس براہ راست اپنے ان باکس میں پائیں۔"
+
+msgid "Go to my account"
+msgstr "میرے اکاؤنٹ پر جائیں"
+
+msgid "Grand Total"
+msgstr "کل رقم"
+
+msgid "Hello %(name)s,"
+msgstr "السلام علیکم %(name)s،"
+
+msgid "Hello, %(name)s"
+msgstr "خوش آمدید، %(name)s"
+
+msgid "Help & Support"
+msgstr "مدد اور معاونت"
+
+msgid "Hi %(name)s,"
+msgstr "محترم %(name)s،"
+
+msgid "Home"
+msgstr "ہوم"
+
+msgid "House / Road / Details"
+msgstr "مکان / سڑک / تفصیل"
+
+msgid "INVOICE"
+msgstr "انوائس"
+
+msgid "If an account exists with that email, we have sent a password reset link."
+msgstr "اگر اس ای میل سے اکاؤنٹ موجود ہے تو ہم نے پاس ورڈ ری سیٹ لنک بھیج دیا ہے۔"
+
+msgid "If you didn't request this, you can ignore this email."
+msgstr "اگر آپ نے یہ درخواست نہیں کی تو اس ای میل کو نظر انداز کریں۔"
+
+msgid "In progress"
+msgstr "جاری"
+
+msgid "In stock"
+msgstr "اسٹاک میں ہے"
+
+msgid "In stock only"
+msgstr "صرف اسٹاک میں موجود"
+
+msgid "Increase"
+msgstr "بڑھائیں"
+
+msgid "Information"
+msgstr "معلومات"
+
+msgid "Inside Dhaka"
+msgstr "ڈھاکہ کے اندر"
+
+msgid "Invalid coupon code."
+msgstr "غلط کوپن کوڈ۔"
+
+msgid "Invalid product in cart."
+msgstr "کارٹ میں غلط پروڈکٹ ہے۔"
+
+msgid "Invalid request."
+msgstr "غلط درخواست۔"
+
+msgid "Invoice"
+msgstr "انوائس"
+
+msgid "It only takes a minute"
+msgstr "صرف ایک منٹ لگے گا"
+
+msgid "Item removed from cart."
+msgstr "کارٹ سے آئٹم ہٹا دیا گیا۔"
+
+msgid "Items"
+msgstr "اشیاء"
+
+msgid "Khulna"
+msgstr "کھلنا"
+
+msgid "Language"
+msgstr "زبان"
+
+msgid "Last 30 days"
+msgstr "پچھلے 30 دن"
+
+msgid "Last name"
+msgstr "آخری نام"
+
+msgid "Link expired"
+msgstr "لنک کی میعاد ختم"
+
+msgid "Login"
+msgstr "لاگ ان"
+
+msgid "Login to your %(name)s account"
+msgstr "اپنے %(name)s اکاؤنٹ میں لاگ ان کریں"
+
+msgid "Logout"
+msgstr "لاگ آؤٹ"
+
+msgid "Looks like you haven't added anything yet."
+msgstr "لگتا ہے آپ نے ابھی تک کچھ شامل نہیں کیا۔"
+
+msgid "Low stock"
+msgstr "کم اسٹاک"
+
+msgid "Low stock in branches"
+msgstr "شاخوں میں کم اسٹاک"
+
+msgid "Make this my default address"
+msgstr "اسے میرا ڈیفالٹ پتہ بنائیں"
+
+msgid "Male"
+msgstr "مرد"
+
+msgid "Manage"
+msgstr "انتظام کریں"
+
+msgid "Manage orders"
+msgstr "آرڈرز کا انتظام"
+
+msgid "Manager"
+msgstr "مینیجر"
+
+msgid "Max"
+msgstr "زیادہ سے زیادہ"
+
+msgid "Menu"
+msgstr "مینو"
+
+msgid "Message"
+msgstr "پیغام"
+
+msgid "Method"
+msgstr "طریقہ"
+
+msgid "Min"
+msgstr "کم از کم"
+
+msgid "Minimum order ৳%(amount)s required for this coupon."
+msgstr "اس کوپن کے لیے کم از کم ৳%(amount)s کا آرڈر ضروری ہے۔"
+
+msgid "My Account"
+msgstr "میرا اکاؤنٹ"
+
+msgid "My Orders"
+msgstr "میرے آرڈرز"
+
+msgid "My Profile"
+msgstr "میری پروفائل"
+
+msgid "My Wishlist"
+msgstr "میری وش لسٹ"
+
+msgid "My account"
+msgstr "میرا اکاؤنٹ"
+
+msgid "My orders"
+msgstr "میرے آرڈرز"
+
+msgid "Mymensingh"
+msgstr "میمن سنگھ"
+
+msgid "Nagad"
+msgstr "نگد"
+
+msgid "Nagad payment steps:"
+msgstr "نگد ادائیگی کے مراحل:"
+
+msgid "Name"
+msgstr "نام"
+
+msgid "Need help? Call"
+msgstr "مدد چاہیے؟ کال کریں"
+
+msgid "New Arrivals"
+msgstr "نئی آمد"
+
+msgid "New here?"
+msgstr "نئے ہیں؟"
+
+msgid "New sale"
+msgstr "نئی فروخت"
+
+msgid "Newest"
+msgstr "تازہ ترین"
+
+msgid "Next"
+msgstr "اگلا"
+
+msgid "No address saved yet."
+msgstr "ابھی تک کوئی پتہ محفوظ نہیں۔"
+
+msgid "No branches yet."
+msgstr "ابھی تک کوئی شاخ نہیں۔"
+
+msgid "No description yet."
+msgstr "ابھی کوئی تفصیل نہیں۔"
+
+msgid "No order found with that order number and phone."
+msgstr "اس آرڈر نمبر اور فون سے کوئی آرڈر نہیں ملا۔"
+
+msgid "No orders yet"
+msgstr "ابھی تک کوئی آرڈر نہیں"
+
+msgid "No products found"
+msgstr "کوئی پروڈکٹ نہیں ملی"
+
+msgid "No reviews yet. Be the first to review this product!"
+msgstr "ابھی کوئی جائزہ نہیں۔ پہلا جائزہ آپ لکھیں!"
+
+msgid "No sales in this period."
+msgstr "اس مدت میں کوئی فروخت نہیں۔"
+
+msgid "No sales yet."
+msgstr "ابھی تک کوئی فروخت نہیں۔"
+
+msgid "No sub-categories"
+msgstr "کوئی ذیلی زمرہ نہیں"
+
+msgid "Not enough stock for “%(name)s” in this branch (available: %(n)s)."
+msgstr "اس شاخ میں “%(name)s” کا کافی اسٹاک نہیں (دستیاب: %(n)s)۔"
+
+msgid "Not enough stock in this branch"
+msgstr "اس شاخ میں کافی اسٹاک نہیں"
+
+msgid "Note"
+msgstr "نوٹ"
+
+msgid "On discount"
+msgstr "رعایت پر"
+
+msgid "Online orders today"
+msgstr "آج کے آن لائن آرڈرز"
+
+msgid "Online, last 30 days"
+msgstr "آن لائن، پچھلے 30 دن"
+
+msgid "Open the Nagad app and tap “Send Money”"
+msgstr "نگد ایپ کھولیں اور “Send Money” دبائیں"
+
+msgid "Open the bKash app and tap “Send Money”"
+msgstr "بیکاش ایپ کھولیں اور “Send Money” دبائیں"
+
+msgid "Option"
+msgstr "آپشن"
+
+msgid "Order"
+msgstr "آرڈر"
+
+msgid "Order Summary"
+msgstr "آرڈر کا خلاصہ"
+
+msgid "Order confirmation will be sent here (optional)"
+msgstr "آرڈر کی تصدیق یہاں بھیجی جائے گی (اختیاری)"
+
+msgid "Order history"
+msgstr "آرڈر کی تاریخ"
+
+msgid "Order note (optional)"
+msgstr "آرڈر نوٹ (اختیاری)"
+
+msgid "Order number"
+msgstr "آرڈر نمبر"
+
+msgid "Order number, e.g. SB2610291234"
+msgstr "آرڈر نمبر، مثلاً SB2610291234"
+
+msgid "Order placed"
+msgstr "آرڈر ہو گیا"
+
+msgid "Order status"
+msgstr "آرڈر کی حالت"
+
+msgid "Orders by status"
+msgstr "حالت کے لحاظ سے آرڈرز"
+
+msgid "Other"
+msgstr "دیگر"
+
+msgid "Others"
+msgstr "دیگر"
+
+msgid "Out of stock"
+msgstr "اسٹاک ختم"
+
+msgid "Outside Dhaka"
+msgstr "ڈھاکہ سے باہر"
+
+msgid "Page not found"
+msgstr "صفحہ نہیں ملا"
+
+msgid "Paid"
+msgstr "ادا شدہ"
+
+msgid "Paid amount is less than the total."
+msgstr "ادا کی گئی رقم کل سے کم ہے۔"
+
+msgid "Password"
+msgstr "پاس ورڈ"
+
+msgid "Password changed"
+msgstr "پاس ورڈ تبدیل ہو گیا"
+
+msgid "Password reset complete"
+msgstr "پاس ورڈ ری سیٹ مکمل"
+
+msgid "Pay when you receive"
+msgstr "سامان ملنے پر ادائیگی کریں"
+
+msgid "Pay with cash when the product is delivered to you."
+msgstr "پروڈکٹ ملنے پر نقد ادائیگی کریں۔"
+
+msgid "Payment"
+msgstr "ادائیگی"
+
+msgid "Payment Method"
+msgstr "ادائیگی کا طریقہ"
+
+msgid "Payment methods (30 days)"
+msgstr "ادائیگی کے طریقے (30 دن)"
+
+msgid "Payment status"
+msgstr "ادائیگی کی حالت"
+
+msgid "Payment summary"
+msgstr "ادائیگی کا خلاصہ"
+
+msgid "Payments to verify"
+msgstr "تصدیق طلب ادائیگیاں"
+
+msgid "Pending"
+msgstr "زیر التواء"
+
+msgid "Pending orders"
+msgstr "زیر التواء آرڈرز"
+
+msgid "Phone"
+msgstr "فون"
+
+msgid "Phone used in the order"
+msgstr "آرڈر میں دیا گیا فون"
+
+msgid "Place Order"
+msgstr "آرڈر دیں"
+
+msgid "Placed on %(date)s"
+msgstr "%(date)s کو آرڈر کیا گیا"
+
+msgid "Please check your internet connection and try again."
+msgstr "براہ کرم انٹرنیٹ کنکشن چیک کریں اور دوبارہ کوشش کریں۔"
+
+msgid "Please enter a valid email."
+msgstr "براہ کرم درست ای میل درج کریں۔"
+
+msgid "Please enter the number you paid from."
+msgstr "جس نمبر سے ادائیگی کی وہ درج کریں۔"
+
+msgid "Please give a rating and write a comment."
+msgstr "براہ کرم ریٹنگ دیں اور تبصرہ لکھیں۔"
+
+msgid "Please login first."
+msgstr "براہ کرم پہلے لاگ ان کریں۔"
+
+msgid "Please select %(options)s."
+msgstr "براہ کرم %(options)s منتخب کریں۔"
+
+msgid "Previous"
+msgstr "پچھلا"
+
+msgid "Price"
+msgstr "قیمت"
+
+msgid "Price: High to Low"
+msgstr "قیمت: زیادہ سے کم"
+
+msgid "Price: Low to High"
+msgstr "قیمت: کم سے زیادہ"
+
+msgid "Print / Save PDF"
+msgstr "پرنٹ / PDF محفوظ کریں"
+
+msgid "Print receipt"
+msgstr "رسید پرنٹ کریں"
+
+msgid "Proceed to Checkout"
+msgstr "چیک آؤٹ کریں"
+
+msgid "Processing"
+msgstr "تیاری میں"
+
+msgid "Product"
+msgstr "پروڈکٹ"
+
+msgid "Products"
+msgstr "پروڈکٹس"
+
+msgid "Profile"
+msgstr "پروفائل"
+
+msgid "Profile picture"
+msgstr "پروفائل تصویر"
+
+msgid "Profile updated."
+msgstr "پروفائل اپ ڈیٹ ہو گئی۔"
+
+msgid "Qty"
+msgstr "مقدار"
+
+msgid "Quantity"
+msgstr "مقدار"
+
+msgid "RETURNED"
+msgstr "واپس کر دیا گیا"
+
+msgid "Rajshahi"
+msgstr "راجشاہی"
+
+msgid "Rangpur"
+msgstr "رنگپور"
+
+msgid "Rating"
+msgstr "ریٹنگ"
+
+msgid "Receipt"
+msgstr "رسید"
+
+msgid "Receipt no. / phone / name"
+msgstr "رسید نمبر / فون / نام"
+
+msgid "Receipts"
+msgstr "رسیدیں"
+
+msgid "Receipts today"
+msgstr "آج کی رسیدیں"
+
+msgid "Recent orders"
+msgstr "حالیہ آرڈرز"
+
+msgid "Refunded"
+msgstr "رقم واپس"
+
+msgid "Remove"
+msgstr "ہٹائیں"
+
+msgid "Removed from wishlist."
+msgstr "وش لسٹ سے ہٹا دیا گیا۔"
+
+msgid "Reprint"
+msgstr "دوبارہ پرنٹ"
+
+msgid "Request a new link"
+msgstr "نیا لنک طلب کریں"
+
+msgid "Reset"
+msgstr "ری سیٹ"
+
+msgid "Results for “%(q)s”"
+msgstr "“%(q)s” کے نتائج"
+
+msgid "Return"
+msgstr "واپس لیں"
+
+msgid "Return this whole sale? Stock will be added back."
+msgstr "پوری فروخت واپس لیں؟ اسٹاک دوبارہ شامل ہو جائے گا۔"
+
+msgid "Returned"
+msgstr "واپس کیا گیا"
+
+msgid "Reviews"
+msgstr "جائزے"
+
+msgid "Sale %(n)s returned. Stock added back to the branch."
+msgstr "فروخت %(n)s واپس لی گئی۔ اسٹاک شاخ میں شامل ہو گیا۔"
+
+msgid "Sales"
+msgstr "فروخت"
+
+msgid "Sales — last 14 days"
+msgstr "فروخت — پچھلے 14 دن"
+
+msgid "Sat – Thu, 10:00 AM – 8:00 PM"
+msgstr "ہفتہ – جمعرات، صبح 10 – رات 8 بجے"
+
+msgid "Save address"
+msgstr "پتہ محفوظ کریں"
+
+msgid "Save changes"
+msgstr "تبدیلیاں محفوظ کریں"
+
+msgid "Save this address to my account"
+msgstr "یہ پتہ میرے اکاؤنٹ میں محفوظ کریں"
+
+msgid "Save your order number. You can track it anytime from"
+msgstr "اپنا آرڈر نمبر محفوظ کر لیں۔ آپ اسے کسی بھی وقت یہاں سے ٹریک کر سکتے ہیں:"
+
+msgid "Saving..."
+msgstr "محفوظ ہو رہا ہے..."
+
+msgid "Scan or tap a product to add it"
+msgstr "پروڈکٹ شامل کرنے کے لیے اسکین کریں یا ٹیپ کریں"
+
+msgid "Search"
+msgstr "تلاش کریں"
+
+msgid "Search in %(name)s..."
+msgstr "%(name)s میں تلاش کریں..."
+
+msgid "Search product name, or scan barcode / SKU (F2)"
+msgstr "پروڈکٹ کا نام تلاش کریں یا بارکوڈ / SKU اسکین کریں (F2)"
+
+msgid "See all"
+msgstr "سب دیکھیں"
+
+msgid "Seller Dashboard"
+msgstr "سیلر ڈیش بورڈ"
+
+msgid "Send"
+msgstr "بھیجیں"
+
+msgid "Send message"
+msgstr "پیغام بھیجیں"
+
+msgid "Send reset link"
+msgstr "ری سیٹ لنک بھیجیں"
+
+msgid "Send us a message"
+msgstr "ہمیں پیغام بھیجیں"
+
+msgid "Set a new password"
+msgstr "نیا پاس ورڈ سیٹ کریں"
+
+msgid "Share your experience..."
+msgstr "اپنا تجربہ شیئر کریں..."
+
+msgid "Shipped"
+msgstr "روانہ کر دیا گیا"
+
+msgid "Shop"
+msgstr "شاپ"
+
+msgid "Shop Now"
+msgstr "ابھی خریدیں"
+
+msgid "Shop POS (counter sale)"
+msgstr "دکان POS (کاؤنٹر فروخت)"
+
+msgid "Shop sales today"
+msgstr "آج دکان میں فروخت"
+
+msgid "Shop sales, last 30 days"
+msgstr "دکان فروخت، پچھلے 30 دن"
+
+msgid "Shopping Cart"
+msgstr "شاپنگ کارٹ"
+
+msgid "Sign up"
+msgstr "سائن اپ"
+
+msgid "Size"
+msgstr "سائز"
+
+msgid "Something went wrong."
+msgstr "کچھ غلط ہو گیا۔"
+
+msgid "Sorry, only %(n)s pcs of “%(name)s” left in stock. Please update your cart."
+msgstr "معذرت، “%(name)s” کے صرف %(n)s عدد اسٹاک میں ہیں۔ براہ کرم کارٹ اپ ڈیٹ کریں۔"
+
+msgid "Sorry, this product is out of stock."
+msgstr "معذرت، یہ پروڈکٹ اسٹاک میں نہیں ہے۔"
+
+msgid "Sort by"
+msgstr "ترتیب دیں"
+
+msgid "Specification"
+msgstr "تفصیلات"
+
+msgid "Start shopping"
+msgstr "خریداری شروع کریں"
+
+msgid "Status"
+msgstr "حالت"
+
+msgid "Sub-categories"
+msgstr "ذیلی زمرے"
+
+msgid "Subject"
+msgstr "موضوع"
+
+msgid "Submit review"
+msgstr "جائزہ جمع کریں"
+
+msgid "Subscribe"
+msgstr "سبسکرائب کریں"
+
+msgid "Subscribe to our newsletter"
+msgstr "ہمارے نیوز لیٹر کو سبسکرائب کریں"
+
+msgid "Subscribed successfully!"
+msgstr "کامیابی سے سبسکرائب ہو گیا!"
+
+msgid "Subtotal"
+msgstr "ذیلی کل"
+
+msgid "Subtotal (%(n)s items)"
+msgstr "ذیلی کل (%(n)s اشیاء)"
+
+msgid "Sylhet"
+msgstr "سلہٹ"
+
+msgid "Thank you for shopping with %(name)s!"
+msgstr "%(name)s سے خریداری کا شکریہ!"
+
+msgid "Thank you for your order at %(site_name)s!"
+msgstr "%(site_name)s پر آرڈر دینے کا شکریہ!"
+
+msgid "Thank you for your review!"
+msgstr "آپ کے جائزے کا شکریہ!"
+
+msgid "Thank you! Your order has been placed."
+msgstr "شکریہ! آپ کا آرڈر موصول ہو گیا ہے۔"
+
+msgid "Thanks! We received your message and will reply soon."
+msgstr "شکریہ! ہمیں آپ کا پیغام مل گیا، جلد جواب دیں گے۔"
+
+msgid "The cart is empty."
+msgstr "کارٹ خالی ہے۔"
+
+msgid "The page you are looking for doesn't exist or has been moved."
+msgstr "آپ جو صفحہ تلاش کر رہے ہیں وہ موجود نہیں یا منتقل کر دیا گیا ہے۔"
+
+msgid "Theme & Colors"
+msgstr "تھیم اور رنگ"
+
+msgid "This coupon has reached its usage limit."
+msgstr "اس کوپن کی استعمال کی حد پوری ہو گئی ہے۔"
+
+msgid "This coupon is expired or inactive."
+msgstr "یہ کوپن ختم یا غیر فعال ہے۔"
+
+msgid "This is a computer generated invoice."
+msgstr "یہ کمپیوٹر سے تیار کردہ انوائس ہے۔"
+
+msgid "This order can no longer be cancelled."
+msgstr "یہ آرڈر اب منسوخ نہیں کیا جا سکتا۔"
+
+msgid "This order was %(status)s."
+msgstr "اس آرڈر کی حالت: %(status)s۔"
+
+msgid "This reset link is invalid or has already been used."
+msgstr "یہ ری سیٹ لنک غلط ہے یا پہلے استعمال ہو چکا ہے۔"
+
+msgid "Time"
+msgstr "وقت"
+
+msgid "To"
+msgstr "تک"
+
+msgid "Today"
+msgstr "آج"
+
+msgid "Today's orders"
+msgstr "آج کے آرڈرز"
+
+msgid "Today's sales"
+msgstr "آج کی فروخت"
+
+msgid "Top Rated"
+msgstr "اعلیٰ ریٹنگ"
+
+msgid "Top products (30 days)"
+msgstr "سرفہرست پروڈکٹس (30 دن)"
+
+msgid "Top products in shops (30 days)"
+msgstr "دکانوں میں سرفہرست پروڈکٹس (30 دن)"
+
+msgid "Total"
+msgstr "کل"
+
+msgid "Total orders"
+msgstr "کل آرڈرز"
+
+msgid "Total sales"
+msgstr "کل فروخت"
+
+msgid "Track"
+msgstr "ٹریک کریں"
+
+msgid "Track Order"
+msgstr "آرڈر ٹریک کریں"
+
+msgid "Track your order"
+msgstr "اپنا آرڈر ٹریک کریں"
+
+msgid "Transaction ID"
+msgstr "ٹرانزیکشن آئی ڈی"
+
+msgid "Transaction ID is required for mobile payment."
+msgstr "موبائل ادائیگی کے لیے ٹرانزیکشن آئی ڈی ضروری ہے۔"
+
+msgid "Transfer stock"
+msgstr "اسٹاک منتقل کریں"
+
+msgid "Try a different search or remove some filters."
+msgstr "کچھ اور تلاش کریں یا کچھ فلٹر ہٹائیں۔"
+
+msgid "Try again"
+msgstr "دوبارہ کوشش کریں"
+
+msgid "Units in stock"
+msgstr "اسٹاک میں کل عدد"
+
+msgid "Unpaid"
+msgstr "غیر ادا شدہ"
+
+msgid "Unread messages"
+msgstr "غیر پڑھے پیغامات"
+
+msgid "Update password"
+msgstr "پاس ورڈ اپ ڈیٹ کریں"
+
+msgid "Username"
+msgstr "یوزر نیم"
+
+msgid "Username or Email"
+msgstr "یوزر نیم یا ای میل"
+
+msgid "Verifying"
+msgstr "تصدیق جاری"
+
+msgid "View"
+msgstr "دیکھیں"
+
+msgid "View all"
+msgstr "سب دیکھیں"
+
+msgid "View order"
+msgstr "آرڈر دیکھیں"
+
+msgid "We Accept"
+msgstr "ہم قبول کرتے ہیں"
+
+msgid "We will call you at <strong>%(phone)s</strong> to confirm your order."
+msgstr "آرڈر کی تصدیق کے لیے ہم آپ کو <strong>%(phone)s</strong> پر کال کریں گے۔"
+
+msgid "We will contact you at %(phone)s soon."
+msgstr "ہم جلد %(phone)s پر رابطہ کریں گے۔"
+
+msgid "Website"
+msgstr "ویب سائٹ"
+
+msgid "Welcome back!"
+msgstr "دوبارہ خوش آمدید!"
+
+msgid "Welcome back, %(name)s!"
+msgstr "دوبارہ خوش آمدید، %(name)s!"
+
+msgid "Welcome to %(name)s"
+msgstr "%(name)s میں خوش آمدید"
+
+msgid "Wishlist"
+msgstr "وش لسٹ"
+
+msgid "Write a review"
+msgstr "جائزہ لکھیں"
+
+msgid "You are already subscribed."
+msgstr "آپ پہلے سے سبسکرائب ہیں۔"
+
+msgid "You are offline"
+msgstr "آپ آف لائن ہیں"
+
+msgid "You are seeing only your own sales."
+msgstr "آپ صرف اپنی فروخت دیکھ رہے ہیں۔"
+
+msgid "You can give at most %(p)s%% discount."
+msgstr "آپ زیادہ سے زیادہ %(p)s%% رعایت دے سکتے ہیں۔"
+
+msgid "You can now login with your new password."
+msgstr "اب آپ نئے پاس ورڈ سے لاگ ان کر سکتے ہیں۔"
+
+msgid "You cannot sell from this branch."
+msgstr "آپ اس شاخ سے فروخت نہیں کر سکتے۔"
+
+msgid "You do not have permission to open this page. Ask the shop owner to give you access."
+msgstr "آپ کو یہ صفحہ کھولنے کی اجازت نہیں۔ دکان کے مالک سے اجازت لیں۔"
+
+msgid "You have already reviewed this product."
+msgstr "آپ اس پروڈکٹ کا جائزہ پہلے دے چکے ہیں۔"
+
+msgid "You have no saved addresses."
+msgstr "آپ کا کوئی محفوظ پتہ نہیں ہے۔"
+
+msgid "You may also like"
+msgstr "آپ کو یہ بھی پسند آ سکتا ہے"
+
+msgid "You requested a password reset. Click the link below to set a new password:"
+msgstr "آپ نے پاس ورڈ ری سیٹ کی درخواست کی ہے۔ نیا پاس ورڈ سیٹ کرنے کے لیے نیچے لنک پر کلک کریں:"
+
+msgid "Your %(method)s payment (TrxID: %(trx)s) is being verified."
+msgstr "آپ کی %(method)s ادائیگی (TrxID: %(trx)s) کی تصدیق ہو رہی ہے۔"
+
+msgid "Your Order"
+msgstr "آپ کا آرڈر"
+
+msgid "Your account has been created successfully!"
+msgstr "آپ کا اکاؤنٹ کامیابی سے بن گیا!"
+
+msgid "Your bKash/Nagad number"
+msgstr "آپ کا بیکاش/نگد نمبر"
+
+msgid "Your cart is empty"
+msgstr "آپ کا کارٹ خالی ہے"
+
+msgid "Your cart is empty."
+msgstr "آپ کا کارٹ خالی ہے۔"
+
+msgid "Your email address"
+msgstr "آپ کا ای میل پتہ"
+
+msgid "Your order has been cancelled."
+msgstr "آپ کا آرڈر منسوخ کر دیا گیا ہے۔"
+
+msgid "Your password has been changed successfully."
+msgstr "آپ کا پاس ورڈ کامیابی سے تبدیل ہو گیا ہے۔"
+
+msgid "Your wishlist is empty"
+msgstr "آپ کی وش لسٹ خالی ہے"
+
+msgid "bKash"
+msgstr "بیکاش"
+
+msgid "bKash payment steps:"
+msgstr "بیکاش ادائیگی کے مراحل:"
+
+msgid "e.g. 01712345678"
+msgstr "مثلاً 01712345678"
+
+msgid "for faster checkout — or continue as guest."
+msgstr "کریں تیز چیک آؤٹ کے لیے — یا مہمان کے طور پر جاری رکھیں۔"
+
+msgid "in stock"
+msgstr "اسٹاک میں"
+
+msgid "only %(n)s left"
+msgstr "صرف %(n)s باقی"
+
+msgid "to"
+msgstr "اس نمبر پر:"
+
+msgid "to write a review."
+msgstr "کریں جائزہ لکھنے کے لیے۔"
+
+msgid "“%(name)s” added to cart."
+msgstr "“%(name)s” کارٹ میں شامل ہو گیا۔"

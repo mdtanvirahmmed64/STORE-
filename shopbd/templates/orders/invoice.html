@@ -1,0 +1,57 @@
+{% load i18n shop_tags %}{% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% trans "Invoice" %} {{ order.order_number }}</title>
+  {% theme_style theme_vars %}
+  <style>
+    body { font-family: "Segoe UI", "Hind Siliguri", "Hind", "Noto Naskh Arabic", Arial, sans-serif; color: #222; background: #f4f5f7; margin: 0; padding: 24px; }
+    .inv { max-width: 820px; margin: auto; background: #fff; padding: 36px; border-radius: 10px; }
+    .top { display: flex; justify-content: space-between; border-bottom: 3px solid var(--primary, #f85606); padding-bottom: 16px; gap: 16px; flex-wrap: wrap; }
+    h1 { margin: 0; color: var(--primary, #f85606); } h2 { margin: 0; font-size: 26px; letter-spacing: 2px; color: #555; }
+    .grid { display: flex; justify-content: space-between; margin: 22px 0; gap: 16px; flex-wrap: wrap; font-size: 14px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th { background: var(--secondary, #1a2b49); color: var(--on-secondary, #fff); text-align: start; padding: 10px; }
+    td { padding: 10px; border-bottom: 1px solid #eee; }
+    .r { text-align: end; }
+    .totals { width: 300px; margin-inline-start: auto; margin-top: 16px; font-size: 14px; }
+    .totals div { display: flex; justify-content: space-between; padding: 6px 0; }
+    .totals .g { border-top: 2px solid #222; font-weight: 700; font-size: 18px; }
+    .foot { margin-top: 36px; text-align: center; color: #777; font-size: 13px; }
+    .btns { text-align: center; margin-bottom: 16px; }
+    .btns button, .btns a { background: var(--primary, #f85606); color: var(--on-primary, #fff); border: 0; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 14px; text-decoration: none; margin: 0 4px; font-family: inherit; }
+    .btns a { background: var(--secondary, #1a2b49); color: var(--on-secondary, #fff); }
+    @media print { body { background: #fff; padding: 0; } .btns { display: none; } .inv { padding: 0; } }
+  </style>
+</head>
+<body>
+  <div class="btns"><button onclick="if (window.AndroidApp) { AndroidApp.print(); } else { window.print(); }">🖨 {% trans "Print / Save PDF" %}</button><a href="{% url 'orders:detail' order.order_number %}">{% trans "Back" %}</a></div>
+  <div class="inv">
+    <div class="top">
+      <div><h1>{{ site.site_name }}</h1><div style="font-size:13px;color:#666">{{ site.address }}<br><span dir="ltr">{{ site.phone }}</span> · {{ site.email }}</div></div>
+      <div style="text-align:end"><h2>{% trans "INVOICE" %}</h2><div style="font-size:14px">#{{ order.order_number }}<br>{{ order.created_at|date:"d M Y" }}</div></div>
+    </div>
+    <div class="grid">
+      <div><strong>{% trans "Bill / Ship to" %}:</strong><br>{{ order.full_name }}<br><span dir="ltr">{{ order.phone }}</span>{% if order.email %}<br>{{ order.email }}{% endif %}<br>{{ order.address_line }}, {{ order.area }}<br>{{ order.city }}, {{ order.get_division_display }}</div>
+      <div style="text-align:end"><strong>{% trans "Payment" %}:</strong> {{ order.get_payment_method_display }}<br><strong>{% trans "Payment status" %}:</strong> {{ order.get_payment_status_display }}<br>
+        {% if order.transaction_id %}<strong>TrxID:</strong> {{ order.transaction_id }}<br>{% endif %}<strong>{% trans "Order status" %}:</strong> {{ order.get_status_display }}</div>
+    </div>
+    <table>
+      <thead><tr><th>#</th><th>{% trans "Product" %}</th><th class="r">{% trans "Price" %}</th><th class="r">{% trans "Qty" %}</th><th class="r">{% trans "Total" %}</th></tr></thead>
+      <tbody>
+        {% for item in order.items.all %}
+        <tr><td>{{ forloop.counter }}</td><td>{% if item.product %}{{ item.product|tr:"name" }}{% else %}{{ item.product_name }}{% endif %}{% if item.variation %}<br><small style="color:#777">{{ item.variation }}</small>{% endif %}</td>
+          <td class="r">{{ item.price|taka }}</td><td class="r">{{ item.quantity }}</td><td class="r">{{ item.line_total|taka }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="totals">
+      <div><span>{% trans "Subtotal" %}</span><span>{{ order.subtotal|taka }}</span></div>
+      {% if order.discount %}<div><span>{% trans "Discount" %}</span><span>−{{ order.discount|taka }}</span></div>{% endif %}
+      <div><span>{% trans "Delivery charge" %}</span><span>{{ order.shipping_cost|taka }}</span></div>
+      <div class="g"><span>{% trans "Grand Total" %}</span><span>{{ order.total|taka }}</span></div>
+    </div>
+    <div class="foot">{% blocktrans with name=site.site_name %}Thank you for shopping with {{ name }}!{% endblocktrans %}<br>{% trans "This is a computer generated invoice." %}</div>
+  </div>
+</body>
+</html>

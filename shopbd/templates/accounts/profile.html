@@ -1,0 +1,15 @@
+{% extends "accounts/account_base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Profile" %} | {{ site.site_name }}{% endblock %}
+{% block account_content %}
+<section class="card card-body">
+  <h1 class="card-title">{% trans "My Profile" %}</h1>
+  <form method="post" enctype="multipart/form-data">{% csrf_token %}
+    <div class="form-row">
+      {% with form=uform %}{% include "accounts/_form_fields.html" %}{% endwith %}
+      {% with form=pform %}{% include "accounts/_form_fields.html" %}{% endwith %}
+    </div>
+    <button type="submit" class="btn btn-primary">{% trans "Save changes" %}</button>
+  </form>
+</section>
+{% endblock %}

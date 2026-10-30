@@ -1,0 +1,75 @@
+{% load i18n shop_tags %}
+<section class="card card-body mb-2">
+  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;align-items:center">
+    <div>
+      <h1 style="font-size:22px;margin:0">{% trans "Order" %} #{{ order.order_number }}</h1>
+      <span class="muted">{% blocktrans with date=order.created_at|date:"d M Y, h:i A" %}Placed on {{ date }}{% endblocktrans %}</span>
+    </div>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+      <span class="badge badge-{{ order.status|status_color }}" style="font-size:14px;padding:.4rem .9rem">{{ order.get_status_display }}</span>
+      <a href="{% url 'orders:invoice' order.order_number %}" class="btn btn-outline btn-sm"><i class="fa-solid fa-file-invoice"></i> {% trans "Invoice" %}</a>
+      {% if order.can_cancel %}
+      <form method="post" action="{% url 'orders:cancel' order.order_number %}" data-confirm="{% trans 'Are you sure you want to cancel this order?' %}">{% csrf_token %}
+        <button class="btn btn-danger btn-sm" type="submit"><i class="fa-solid fa-xmark"></i> {% trans "Cancel order" %}</button>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if order.status == "cancelled" or order.status == "returned" %}
+  <p class="mt-2" style="color:var(--danger)"><i class="fa-solid fa-circle-xmark"></i> {% blocktrans with status=order.get_status_display %}This order was {{ status }}.{% endblocktrans %}</p>
+  {% else %}
+  <div class="tracker">
+    {% for key, label, done in order.progress_steps %}
+    <div class="track-step {% if done %}done{% endif %}">
+      <div class="dot"><i class="fa-solid {% if key == 'pending' %}fa-receipt{% elif key == 'confirmed' %}fa-check{% elif key == 'processing' %}fa-box{% elif key == 'shipped' %}fa-truck{% else %}fa-house{% endif %}"></i></div>
+      <span class="lbl">{{ label }}</span>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</section>
+
+<div class="two-col">
+  <section class="card">
+    <div class="section-head"><h2><i class="fa-solid fa-bag-shopping"></i> {% trans "Items" %}</h2></div>
+    {% for item in order.items.all %}
+    <div class="cart-item" style="grid-template-columns:70px 1fr auto">
+      {% if item.product %}<a href="{{ item.product.get_absolute_url }}"><img src="{{ item.product.image.url }}" alt="" style="width:70px;height:70px"></a>{% else %}<span></span>{% endif %}
+      <div>
+        <div class="name">{% if item.product %}{{ item.product|tr:"name" }}{% else %}{{ item.product_name }}{% endif %}</div>
+        {% if item.variation %}<div class="muted" style="font-size:13px">{{ item.variation }}</div>{% endif %}
+        <div class="muted" style="font-size:13px">{{ item.price|taka }} × {{ item.quantity }}</div>
+      </div>
+      <strong>{{ item.line_total|taka }}</strong>
+    </div>
+    {% endfor %}
+    {% if order.history.all %}
+    <div class="card-body">
+      <h3 class="card-title">{% trans "Order history" %}</h3>
+      <ul class="timeline">
+        {% for h in order.history.all %}<li><strong>{{ h.get_status_display }}</strong> <span class="muted">— {{ h.created_at|date:"d M Y, h:i A" }}</span></li>{% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </section>
+
+  <aside>
+    <section class="card card-body mb-2">
+      <h3 class="card-title">{% trans "Payment summary" %}</h3>
+      <div class="summary-row"><span>{% trans "Subtotal" %}</span><span>{{ order.subtotal|taka }}</span></div>
+      {% if order.discount %}<div class="summary-row" style="color:var(--success)"><span>{% trans "Discount" %}{% if order.coupon %} ({{ order.coupon.code }}){% endif %}</span><span>−{{ order.discount|taka }}</span></div>{% endif %}
+      <div class="summary-row"><span>{% trans "Delivery" %}</span><span>{{ order.shipping_cost|taka }}</span></div>
+      <div class="summary-row total"><span>{% trans "Total" %}</span><span>{{ order.total|taka }}</span></div>
+      <div class="summary-row"><span>{% trans "Method" %}</span><span>{{ order.get_payment_method_display }}</span></div>
+      <div class="summary-row"><span>{% trans "Status" %}</span><span class="badge badge-{{ order.payment_status|status_color }}">{{ order.get_payment_status_display }}</span></div>
+      {% if order.transaction_id %}<div class="summary-row"><span>TrxID</span><span>{{ order.transaction_id }}</span></div>{% endif %}
+    </section>
+    <section class="card card-body">
+      <h3 class="card-title">{% trans "Delivery address" %}</h3>
+      <p style="margin:0;font-size:14px"><strong>{{ order.full_name }}</strong><br><span dir="ltr">{{ order.phone }}</span><br>
+        {{ order.address_line }}, {{ order.area }}<br>{{ order.city }}, {{ order.get_division_display }}</p>
+      {% if order.note %}<p class="muted mt-1" style="font-size:13px">{% trans "Note" %}: {{ order.note }}</p>{% endif %}
+    </section>
+  </aside>
+</div>

@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% load i18n shop_tags %}
+{% block title %}{{ product|tr:"name" }} | {{ site.site_name }}{% endblock %}
+{% block meta_description %}{{ product|tr:"short_description"|default:product.name }}{% endblock %}
+{% block content %}
+{% with pname=product|tr:"name" %}
+<div class="container">
+  <div class="breadcrumb">
+    <a href="{% url 'core:home' %}">{% trans "Home" %}</a>
+    {% if product.category.parent %}<span><a href="{{ product.category.parent.get_absolute_url }}">{{ product.category.parent|tr:"name" }}</a></span>{% endif %}
+    <span><a href="{{ product.category.get_absolute_url }}">{{ product.category|tr:"name" }}</a></span>
+    <span>{{ pname|truncatechars:40 }}</span>
+  </div>
+
+  <section class="card pd">
+    <div>
+      <div class="gallery-main"><img id="main-image" src="{{ product.image.url }}" alt="{{ pname }}"></div>
+      <div class="thumbs">
+        <img src="{{ product.image.url }}" data-full="{{ product.image.url }}" class="active" alt="">
+        {% for img in product.images.all %}<img src="{{ img.image.url }}" data-full="{{ img.image.url }}" alt="{{ img.alt }}">{% endfor %}
+      </div>
+    </div>
+
+    <div class="pd-info">
+      <h1>{{ pname }}</h1>
+      <div class="pd-meta">
+        <span>{% stars product.rating %} <a href="#product-tabs" onclick="document.querySelector('[data-tab=reviews]').click()">{% blocktrans with n=product.review_count %}{{ n }} ratings{% endblocktrans %}</a></span>
+        {% if product.brand %}<span>{% trans "Brand" %}: <a href="{% url 'store:product_list' %}?brand={{ product.brand.slug }}">{{ product.brand.name }}</a></span>{% endif %}
+        {% if product.sku %}<span>SKU: {{ product.sku }}</span>{% endif %}
+        {% if product.sold_count %}<span>{% blocktrans with n=product.sold_count %}{{ n }} sold{% endblocktrans %}</span>{% endif %}
+      </div>
+      {% with sd=product|tr:"short_description" %}{% if sd %}<p class="muted">{{ sd }}</p>{% endif %}{% endwith %}
+
+      <div class="pd-price">
+        <span class="price" id="pd-price" data-base="{{ product.final_price|stringformat:'f' }}">{{ product.final_price|taka }}</span>
+        {% if product.has_discount %}<div><span class="old-price">{{ product.price|taka }}</span><span class="off">-{{ product.discount_percent }}%</span></div>{% endif %}
+      </div>
+
+      <form method="post" action="{% url 'cart:add' product.id %}" class="js-add-cart">{% csrf_token %}
+        {% for kind, group in variations.items %}
+        <div class="var-group">
+          <span>{{ group.label }}:</span>
+          <div class="var-options">
+            {% for v in group.options %}
+            <input type="radio" id="var{{ v.id }}" name="variation_{{ kind }}" value="{{ v.id }}" data-extra="{{ v.extra_price|stringformat:'f' }}" {% if forloop.first %}checked{% endif %}>
+            <label for="var{{ v.id }}">{{ v.value }}{% if v.extra_price %} (+{{ v.extra_price|taka }}){% endif %}</label>
+            {% endfor %}
+          </div>
+        </div>
+        {% endfor %}
+
+        <div class="qty-row">
+          <span style="font-weight:600">{% trans "Quantity" %}:</span>
+          <div class="qty">
+            <button type="button" data-step="-" aria-label="{% trans 'Decrease' %}">−</button>
+            <input type="number" name="quantity" value="1" min="1" max="{{ product.stock }}" aria-label="{% trans 'Quantity' %}">
+            <button type="button" data-step="+" aria-label="{% trans 'Increase' %}">+</button>
+          </div>
+          {% if product.in_stock %}<span class="stock-ok"><i class="fa-solid fa-circle-check"></i> {% trans "In stock" %}{% if product.stock <= 10 %} ({% blocktrans with n=product.stock %}only {{ n }} left{% endblocktrans %}){% endif %}</span>
+          {% else %}<span class="stock-out"><i class="fa-solid fa-circle-xmark"></i> {% trans "Out of stock" %}</span>{% endif %}
+        </div>
+
+        <div class="pd-actions">
+          {% if product.in_stock %}
+          <button type="submit" name="buy_now" value="1" class="btn btn-accent btn-lg"><i class="fa-solid fa-bolt"></i> {% trans "Buy Now" %}</button>
+          <button type="submit" class="btn btn-primary btn-lg"><i class="fa-solid fa-cart-plus"></i> {% trans "Add to Cart" %}</button>
+          {% else %}
+          <button class="btn btn-outline btn-lg" disabled>{% trans "Out of stock" %}</button>
+          {% endif %}
+          <button type="button" class="btn btn-outline btn-lg js-wish {% if in_wishlist %}active{% endif %}" style="flex:0 0 auto;min-width:0"
+                  data-url="{% url 'store:wishlist_toggle' product.id %}" data-login="{% url 'accounts:login' %}?next={{ request.path }}" aria-label="{% trans 'Wishlist' %}">
+            <i class="{% if in_wishlist %}fa-solid{% else %}fa-regular{% endif %} fa-heart" style="color:var(--danger)"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <aside class="pd-side">
+      <div class="row"><i class="fa-solid fa-location-dot"></i><div><strong>{% trans "Delivery" %}</strong><br><span class="muted">{% trans "Inside Dhaka" %}: {{ site.shipping_inside_dhaka|taka }} · {% trans "1–2 days" %}<br>{% trans "Outside Dhaka" %}: {{ site.shipping_outside_dhaka|taka }} · {% trans "3–5 days" %}</span></div></div>
+      {% if site.free_shipping_over %}<div class="row"><i class="fa-solid fa-truck"></i><div>{% blocktrans with amount=site.free_shipping_over|taka %}Free delivery on orders over {{ amount }}{% endblocktrans %}</div></div>{% endif %}
+      {% if site.enable_cod %}<div class="row"><i class="fa-solid fa-money-bill"></i><div>{% trans "Cash on Delivery available" %}</div></div>{% endif %}
+      <div class="row"><i class="fa-solid fa-rotate-left"></i><div>{% trans "7 days easy return" %}</div></div>
+      <div class="row"><i class="fa-solid fa-shield-halved"></i><div>{% trans "100% authentic product" %}</div></div>
+      <div class="row"><i class="fa-solid fa-headset"></i><div>{% trans "Need help? Call" %} <a href="tel:{{ site.phone }}" style="color:var(--primary)" dir="ltr">{{ site.phone }}</a></div></div>
+    </aside>
+  </section>
+
+  <section class="card section" id="product-tabs">
+    <div class="tabs">
+      <button class="active" data-tab="desc">{% trans "Description" %}</button>
+      {% if product.spec_list %}<button data-tab="spec">{% trans "Specification" %}</button>{% endif %}
+      <button data-tab="reviews">{% trans "Reviews" %} ({{ product.review_count }})</button>
+    </div>
+    <div class="tab-panel active" id="desc">{% with d=product|tr:"description" %}{% if d %}{{ d|safe }}{% else %}{% trans "No description yet." %}{% endif %}{% endwith %}</div>
+    {% if product.spec_list %}
+    <div class="tab-panel" id="spec">
+      <table class="spec-table">{% for k, v in product.spec_list %}<tr><td>{{ k }}</td><td>{{ v }}</td></tr>{% endfor %}</table>
+    </div>
+    {% endif %}
+    <div class="tab-panel" id="reviews">
+      <div class="rating-summary">
+        <div class="rating-big"><strong>{{ product.rating|floatformat:1 }}</strong>{% stars product.rating %}<div class="muted">{% blocktrans with n=product.review_count %}{{ n }} reviews{% endblocktrans %}</div></div>
+        <div>
+          {% for star, n, pct in breakdown %}
+          <div class="bar-row"><span>{{ star }}★</span><div class="bar"><span style="width:{{ pct }}%"></span></div><span class="muted">{{ n }}</span></div>
+          {% endfor %}
+        </div>
+      </div>
+
+      {% if user.is_authenticated %}
+        {% if can_review %}
+        <form method="post" action="{% url 'store:add_review' product.slug %}" class="card-body review-form">{% csrf_token %}
+          <strong>{% trans "Write a review" %}</strong>
+          <div class="star-input mt-1">
+            {% for i in "54321" %}<input type="radio" id="star{{ i }}" name="rating" value="{{ i }}" required><label for="star{{ i }}" aria-label="{{ i }}">★</label>{% endfor %}
+          </div>
+          <textarea name="comment" class="form-control mt-1" rows="3" placeholder="{% trans 'Share your experience...' %}" required maxlength="1000"></textarea>
+          <button class="btn btn-primary mt-1" type="submit">{% trans "Submit review" %}</button>
+        </form>
+        {% endif %}
+      {% else %}
+        <p><a class="btn-link" href="{% url 'accounts:login' %}?next={{ request.path }}">{% trans "Login" %}</a> {% trans "to write a review." %}</p>
+      {% endif %}
+
+      {% for r in reviews %}
+      <div class="review">
+        <div class="review-head"><strong>{{ r.user.first_name|default:r.user.username }}</strong><span class="muted">{{ r.created_at|date:"d M Y" }}</span></div>
+        {% stars r.rating %}
+        <p class="mt-1" style="margin-bottom:0">{{ r.comment|linebreaksbr }}</p>
+      </div>
+      {% empty %}
+      <p class="muted">{% trans "No reviews yet. Be the first to review this product!" %}</p>
+      {% endfor %}
+    </div>
+  </section>
+
+  {% if related %}
+  <section class="card section">
+    <div class="section-head"><h2><i class="fa-solid fa-thumbs-up"></i> {% trans "You may also like" %}</h2></div>
+    <div class="product-row">{% for p in related %}{% include "partials/product_card.html" %}{% endfor %}</div>
+  </section>
+  {% endif %}
+</div>
+{% endwith %}
+{% endblock %}

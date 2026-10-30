@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Page not found" %} | {{ site.site_name }}{% endblock %}
+{% block content %}
+<div class="container">
+  <section class="card card-body success-box">
+    <div class="success-icon" style="background:var(--primary-soft);color:var(--primary)"><i class="fa-solid fa-compass"></i></div>
+    <h1>404 — {% trans "Page not found" %}</h1>
+    <p class="muted">{% trans "The page you are looking for doesn't exist or has been moved." %}</p>
+    <a href="{% url 'core:home' %}" class="btn btn-primary">{% trans "Back to home" %}</a>
+  </section>
+</div>
+{% endblock %}

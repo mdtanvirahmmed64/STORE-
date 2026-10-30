@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Access denied" %} | {{ site.site_name }}{% endblock %}
+{% block content %}
+<div class="container">
+  <section class="card card-body success-box">
+    <div class="success-icon" style="background:#fde6e7;color:var(--danger)"><i class="fa-solid fa-lock"></i></div>
+    <h1>{% trans "Access denied" %}</h1>
+    <p class="muted">{% trans "You do not have permission to open this page. Ask the shop owner to give you access." %}</p>
+    <a href="{% url 'core:home' %}" class="btn btn-primary">{% trans "Back to home" %}</a>
+  </section>
+</div>
+{% endblock %}

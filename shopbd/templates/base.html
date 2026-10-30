@@ -1,0 +1,223 @@
+{% load static i18n shop_tags %}{% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}{% get_available_languages as LANGUAGES %}{% get_language_info for LANGUAGE_CODE as cur_lang %}<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ site.site_name }} - {{ site|tr:"tagline" }}{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}{{ site|tr:"tagline" }}{% endblock %}">
+  {% if site.favicon %}<link rel="icon" href="{{ site.favicon.url }}">{% else %}<link rel="icon" href="{% static 'img/icons/icon-192.png' %}">{% endif %}
+  <link rel="manifest" href="{% url 'core:manifest' %}">
+  <meta name="theme-color" content="{{ theme.header_bg }}">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="{{ site.site_name }}">
+  <link rel="apple-touch-icon" href="{% static 'img/icons/apple-touch-icon.png' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?{% if theme.font != 'system' %}family={{ theme.font|urlencode }}:wght@400;500;600;700;800&{% endif %}{% if LANGUAGE_CODE == 'bn' %}family=Hind+Siliguri:wght@400;500;600;700&{% elif LANGUAGE_CODE == 'hi' %}family=Hind:wght@400;500;600;700&{% elif LANGUAGE_CODE == 'ar' or LANGUAGE_CODE == 'ur' %}family=Noto+Naskh+Arabic:wght@400;500;600;700&{% endif %}display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  {% theme_style theme_vars %}
+  {% block extra_head %}{% endblock %}
+</head>
+<body class="lang-{{ LANGUAGE_CODE }}">
+  <div class="topbar">
+    <div class="container">
+      <span>{% with notice=site|tr:"top_notice" %}{% if notice %}<i class="fa-solid fa-bullhorn"></i> {{ notice }}{% endif %}{% endwith %}</span>
+      <div class="topbar-links">
+        <a href="{% url 'orders:track' %}"><i class="fa-solid fa-truck-fast"></i> {% trans "Track Order" %}</a>
+        <a href="tel:{{ site.phone }}" dir="ltr"><i class="fa-solid fa-phone"></i> {{ site.phone }}</a>
+        <a href="{% url 'core:contact' %}">{% trans "Help & Support" %}</a>
+        {% if pos_access %}<a href="{% url 'pos:terminal' %}"><i class="fa-solid fa-cash-register"></i> POS</a>{% endif %}
+        {% if user.is_staff %}<a href="{% url 'core:staff_dashboard' %}"><i class="fa-solid fa-gauge"></i> {% trans "Seller Dashboard" %}</a>{% endif %}
+      </div>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="container header-main">
+      <button class="menu-toggle" aria-label="{% trans 'Menu' %}"><i class="fa-solid fa-bars"></i></button>
+      <a href="{% url 'core:home' %}" class="logo">
+        {% if site.logo %}<img src="{{ site.logo.url }}" alt="{{ site.site_name }}">
+        {% else %}<span class="logo-mark"><i class="fa-solid fa-bag-shopping"></i></span>{{ site.site_name }}{% endif %}
+      </a>
+      <div class="search">
+        <form action="{% url 'store:product_list' %}" method="get" role="search">
+          <input id="search-input" type="search" name="q" value="{{ request.GET.q }}" placeholder="{% blocktrans with name=site.site_name %}Search in {{ name }}...{% endblocktrans %}"
+                 autocomplete="off" data-url="{% url 'store:search_suggest' %}" aria-label="{% trans 'Search' %}">
+          <button type="submit" aria-label="{% trans 'Search' %}"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
+        <div id="search-suggest" class="search-suggest hidden"></div>
+      </div>
+      <div class="header-actions">
+        <div class="dropdown lang-switch">
+          <button class="h-action" data-dropdown aria-label="{% trans 'Language' %}"><i class="fa-solid fa-globe"></i><span class="lbl">{{ cur_lang.name_local }}</span></button>
+          <div class="dropdown-menu lang-menu">
+            <div class="menu-title">{% trans "Choose language" %}</div>
+            <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+              <input type="hidden" name="next" value="{{ request.get_full_path }}">
+              {% for code, name in LANGUAGES %}{% get_language_info for code as lang %}
+              <button type="submit" name="language" value="{{ code }}" class="{% if code == LANGUAGE_CODE %}active{% endif %}" lang="{{ code }}">
+                <span class="lang-code">{{ code|upper }}</span>
+                <span>{{ lang.name_local }}<small>{{ lang.name }}</small></span>
+                {% if code == LANGUAGE_CODE %}<i class="fa-solid fa-check"></i>{% endif %}
+              </button>
+              {% endfor %}
+            </form>
+          </div>
+        </div>
+        <a href="{% url 'store:wishlist' %}" class="h-action hide-sm">
+          <i class="fa-regular fa-heart"></i><span class="lbl">{% trans "Wishlist" %}</span>
+          <span class="h-count js-wish-count {% if not wishlist_count %}hidden{% endif %}">{{ wishlist_count }}</span>
+        </a>
+        <a href="{% url 'cart:detail' %}" class="h-action">
+          <i class="fa-solid fa-cart-shopping"></i><span class="lbl">{% trans "Cart" %}</span>
+          <span class="h-count js-cart-count {% if not cart_count %}hidden{% endif %}">{{ cart_count }}</span>
+        </a>
+        {% if user.is_authenticated %}
+        <div class="dropdown">
+          <button class="h-action" data-dropdown><i class="fa-regular fa-user"></i><span class="lbl">{{ user.first_name|default:user.username|truncatechars:12 }}</span></button>
+          <div class="dropdown-menu">
+            <a href="{% url 'accounts:dashboard' %}"><i class="fa-solid fa-gauge"></i> {% trans "My Account" %}</a>
+            <a href="{% url 'orders:my_orders' %}"><i class="fa-solid fa-box"></i> {% trans "My Orders" %}</a>
+            <a href="{% url 'store:wishlist' %}"><i class="fa-regular fa-heart"></i> {% trans "Wishlist" %}</a>
+            <a href="{% url 'accounts:addresses' %}"><i class="fa-solid fa-location-dot"></i> {% trans "Addresses" %}</a>
+            {% if pos_access %}<hr>
+            <a href="{% url 'pos:terminal' %}"><i class="fa-solid fa-cash-register"></i> {% trans "Shop POS (counter sale)" %}</a>{% endif %}
+            {% if user.is_staff %}<hr>
+            <a href="{% url 'core:staff_dashboard' %}"><i class="fa-solid fa-chart-line"></i> {% trans "Seller Dashboard" %}</a>
+            <a href="{% url 'admin:index' %}"><i class="fa-solid fa-screwdriver-wrench"></i> {% trans "Admin Panel" %}</a>
+            <a href="{% url 'admin:core_themesetting_changelist' %}"><i class="fa-solid fa-palette"></i> {% trans "Theme & Colors" %}</a>{% endif %}
+            <hr>
+            <form method="post" action="{% url 'accounts:logout' %}">{% csrf_token %}
+              <button type="submit"><i class="fa-solid fa-right-from-bracket"></i> {% trans "Logout" %}</button>
+            </form>
+          </div>
+        </div>
+        {% else %}
+        <a href="{% url 'accounts:login' %}" class="h-action"><i class="fa-regular fa-user"></i><span class="lbl">{% trans "Login" %}</span></a>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+
+  <nav class="catnav">
+    <div class="container">
+      <ul>
+        <li><a href="{% url 'store:product_list' %}"><i class="fa-solid fa-grip"></i> {% trans "All Products" %}</a></li>
+        <li><a href="{% url 'store:product_list' %}?filter=flash"><i class="fa-solid fa-bolt" style="color:var(--primary)"></i> {% trans "Flash Sale" %}</a></li>
+        {% for cat in menu_categories %}
+        <li class="{% if cat.children.all %}has-sub{% endif %}">
+          <a href="{{ cat.get_absolute_url }}">{% if cat.icon %}<i class="fa-solid {{ cat.icon }}"></i>{% endif %} {{ cat|tr:"name" }}</a>
+          {% if cat.children.all %}
+          <button type="button" class="sub-toggle" aria-expanded="false" aria-label="{% trans 'Sub-categories' %}"><i class="fa-solid fa-angle-down"></i><span class="caret-fallback">▾</span></button>
+          <div class="sub">
+            <a href="{{ cat.get_absolute_url }}" class="sub-all">{% blocktrans with name=cat|tr:"name" %}All in {{ name }}{% endblocktrans %}</a>
+            {% for sub in cat.children.all %}<a href="{{ sub.get_absolute_url }}">{{ sub|tr:"name" }}</a>{% endfor %}
+          </div>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </nav>
+
+  {% if messages %}
+  <div class="messages">
+    {% for m in messages %}
+    <div class="toast {% if m.tags == 'error' %}error{% elif m.tags == 'warning' %}warning{% elif m.tags == 'success' %}success{% else %}info{% endif %}">
+      <i class="fa-solid {% if m.tags == 'error' %}fa-circle-xmark{% elif m.tags == 'warning' %}fa-triangle-exclamation{% elif m.tags == 'success' %}fa-circle-check{% else %}fa-circle-info{% endif %}"></i>
+      <div>{{ m }}</div><button class="close" aria-label="{% trans 'Close' %}">&times;</button>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <section class="newsletter no-print">
+    <div class="container">
+      <div>
+        <h3><i class="fa-regular fa-envelope"></i> {% trans "Subscribe to our newsletter" %}</h3>
+        <p>{% trans "Get offers, coupons and new arrivals straight to your inbox." %}</p>
+      </div>
+      <form method="post" action="{% url 'core:subscribe' %}">{% csrf_token %}
+        <input class="form-control" type="email" name="email" placeholder="{% trans 'Your email address' %}" required>
+        <button class="btn btn-primary" type="submit">{% trans "Subscribe" %}</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h4>{{ site.site_name }}</h4>
+        <p>{{ site|tr:"footer_text" }}</p>
+        <p><i class="fa-solid fa-location-dot"></i> {{ site.address }}<br>
+           <i class="fa-solid fa-phone"></i> <span dir="ltr">{{ site.phone }}</span><br>
+           <i class="fa-solid fa-envelope"></i> {{ site.email }}</p>
+        <div class="socials">
+          {% if site.facebook %}<a href="{{ site.facebook }}" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>{% endif %}
+          {% if site.instagram %}<a href="{{ site.instagram }}" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>{% endif %}
+          {% if site.youtube %}<a href="{{ site.youtube }}" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>{% endif %}
+        </div>
+      </div>
+      <div>
+        <h4>{% trans "Customer Care" %}</h4>
+        <ul>
+          <li><a href="{% url 'orders:track' %}">{% trans "Track your order" %}</a></li>
+          <li><a href="{% url 'accounts:dashboard' %}">{% trans "My account" %}</a></li>
+          <li><a href="{% url 'orders:my_orders' %}">{% trans "My orders" %}</a></li>
+          <li><a href="{% url 'core:contact' %}">{% trans "Contact us" %}</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>{% trans "Information" %}</h4>
+        <ul>
+          {% for p in footer_pages %}<li><a href="{% url 'core:page' p.slug %}">{{ p|tr:"title" }}</a></li>{% endfor %}
+        </ul>
+      </div>
+      <div>
+        <h4>{% trans "We Accept" %}</h4>
+        <div class="pay-icons">
+          {% if site.enable_cod %}<span>{% trans "Cash on Delivery" %}</span>{% endif %}
+          {% if site.enable_bkash %}<span style="color:#e2136e">{% trans "bKash" %}</span>{% endif %}
+          {% if site.enable_nagad %}<span style="color:#ec1c24">{% trans "Nagad" %}</span>{% endif %}
+        </div>
+        <p class="mt-2"><i class="fa-solid fa-truck"></i> {% trans "Inside Dhaka" %} {{ site.shipping_inside_dhaka|taka }} · {% trans "Outside Dhaka" %} {{ site.shipping_outside_dhaka|taka }}</p>
+        <h4 class="mt-2">{% trans "Language" %}</h4>
+        <form action="{% url 'set_language' %}" method="post" class="footer-langs">{% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.get_full_path }}">
+          {% for code, name in LANGUAGES %}{% get_language_info for code as lang %}
+          <button type="submit" name="language" value="{{ code }}" class="{% if code == LANGUAGE_CODE %}active{% endif %}">{{ lang.name_local }}</button>
+          {% endfor %}
+        </form>
+      </div>
+    </div>
+    <div class="copyright">© {% now "Y" %} {{ site.site_name }}. {% trans "All rights reserved." %}</div>
+  </footer>
+
+  <nav class="bottom-nav">
+    <a href="{% url 'core:home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}"><i class="fa-solid fa-house"></i>{% trans "Home" %}</a>
+    <a href="{% url 'store:product_list' %}" class="{% if request.resolver_match.url_name == 'product_list' %}active{% endif %}"><i class="fa-solid fa-grip"></i>{% trans "Shop" %}</a>
+    <a href="{% url 'cart:detail' %}" class="{% if request.resolver_match.app_name == 'cart' %}active{% endif %}"><i class="fa-solid fa-cart-shopping"></i>{% trans "Cart" %}<span class="h-count js-cart-count {% if not cart_count %}hidden{% endif %}">{{ cart_count }}</span></a>
+    <a href="{% url 'store:wishlist' %}"><i class="fa-regular fa-heart"></i>{% trans "Wishlist" %}</a>
+    <a href="{% url 'accounts:dashboard' %}" class="{% if request.resolver_match.app_name == 'accounts' %}active{% endif %}"><i class="fa-regular fa-user"></i>{% trans "Account" %}</a>
+  </nav>
+  <button class="back-top" aria-label="{% trans 'Back to top' %}"><i class="fa-solid fa-arrow-up"></i></button>
+
+  {% trans "Ends in" as t_ends %}{% trans "Something went wrong." as t_wrong %}{% trans "Free" as t_free %}{% trans "Close" as t_close %}
+  <script>
+    window.I18N = { endsIn: "{{ t_ends|escapejs }}", wrong: "{{ t_wrong|escapejs }}", free: "{{ t_free|escapejs }}",
+                    close: "{{ t_close|escapejs }}", bnDigits: {% if LANGUAGE_CODE == 'bn' %}true{% else %}false{% endif %} };
+  </script>
+  <script src="{% static 'js/main.js' %}"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => navigator.serviceWorker.register("{% url 'core:service_worker' %}", { scope: "/" }).catch(() => {}));
+    }
+  </script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

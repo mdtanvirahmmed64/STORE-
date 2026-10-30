@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Login" %} | {{ site.site_name }}{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="card auth-box"><div class="card-body">
+    <h1>{% trans "Welcome back!" %}</h1>
+    <p class="muted text-center">{% blocktrans with name=site.site_name %}Login to your {{ name }} account{% endblocktrans %}</p>
+    <form method="post">{% csrf_token %}
+      {% include "accounts/_form_fields.html" %}
+      <input type="hidden" name="next" value="{{ next }}">
+      <div class="text-end mb-2"><a href="{% url 'accounts:password_reset' %}" class="btn-link" style="font-size:13px">{% trans "Forgot password?" %}</a></div>
+      <button type="submit" class="btn btn-primary btn-lg btn-block">{% trans "Login" %}</button>
+    </form>
+    <p class="text-center mt-2">{% trans "New here?" %} <a class="btn-link" href="{% url 'accounts:register' %}{% if next %}?next={{ next|urlencode }}{% endif %}">{% trans "Create an account" %}</a></p>
+  </div></div>
+</div>
+{% endblock %}

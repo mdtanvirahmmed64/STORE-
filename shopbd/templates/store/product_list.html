@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load i18n shop_tags %}
+{% block title %}{% if category %}{{ category|tr:"name" }}{% elif q %}{% trans "Search" %}: {{ q }}{% else %}{% trans "All Products" %}{% endif %} | {{ site.site_name }}{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="breadcrumb">
+    <a href="{% url 'core:home' %}">{% trans "Home" %}</a>
+    <span><a href="{% url 'store:product_list' %}">{% trans "Products" %}</a></span>
+    {% if category.parent %}<span><a href="{{ category.parent.get_absolute_url }}">{{ category.parent|tr:"name" }}</a></span>{% endif %}
+    {% if category %}<span>{{ category|tr:"name" }}</span>{% endif %}
+  </div>
+
+  <div class="listing">
+    <aside class="filters" id="filters">
+      <form method="get" action="">
+        {% if q %}<input type="hidden" name="q" value="{{ q }}">{% endif %}
+        <input type="hidden" name="sort" value="{{ sort }}">
+        {% if request.GET.filter %}<input type="hidden" name="filter" value="{{ request.GET.filter }}">{% endif %}
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <strong><i class="fa-solid fa-filter"></i> {% trans "Filters" %}</strong>
+          <button type="button" class="btn btn-link filter-toggle" data-toggle-filters aria-label="{% trans 'Close' %}"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div class="filter-block">
+          <h4>{% if category %}{% trans "Sub-categories" %}{% else %}{% trans "Categories" %}{% endif %}</h4>
+          {% if category %}<a class="sub-link active" href="{{ category.get_absolute_url }}">{% blocktrans with name=category|tr:"name" %}All in {{ name }}{% endblocktrans %}</a>{% endif %}
+          {% for c in subcategories %}
+          <a class="sub-link" href="{{ c.get_absolute_url }}{% if q %}?q={{ q|urlencode }}{% endif %}">{{ c|tr:"name" }}</a>
+          {% empty %}<span class="muted" style="font-size:13px">{% trans "No sub-categories" %}</span>{% endfor %}
+        </div>
+
+        <div class="filter-block">
+          <h4>{% trans "Price" %} (৳)</h4>
+          <div class="price-inputs">
+            <input class="form-control" type="number" name="min_price" placeholder="{% trans 'Min' %}" value="{{ request.GET.min_price }}" min="0">
+            <span>–</span>
+            <input class="form-control" type="number" name="max_price" placeholder="{% trans 'Max' %}" value="{{ request.GET.max_price }}" min="0">
+          </div>
+        </div>
+
+        {% if brands %}
+        <div class="filter-block">
+          <h4>{% trans "Brand" %}</h4>
+          {% for b in brands %}
+          <label><input type="checkbox" class="js-filter-auto" name="brand" value="{{ b.slug }}" {% if b.slug in selected_brands %}checked{% endif %}> {{ b.name }}</label>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="filter-block">
+          <h4>{% trans "Rating" %}</h4>
+          {% for r in "4321" %}
+          <label><input type="radio" class="js-filter-auto" name="rating" value="{{ r }}" {% if request.GET.rating == r %}checked{% endif %}> {% stars r %} {% trans "& up" %}</label>
+          {% endfor %}
+        </div>
+
+        <div class="filter-block">
+          <h4>{% trans "Others" %}</h4>
+          <label><input type="checkbox" class="js-filter-auto" name="in_stock" value="1" {% if request.GET.in_stock %}checked{% endif %}> {% trans "In stock only" %}</label>
+          <label><input type="checkbox" class="js-filter-auto" name="discount" value="1" {% if request.GET.discount %}checked{% endif %}> {% trans "On discount" %}</label>
+        </div>
+        <button class="btn btn-primary btn-block" type="submit">{% trans "Apply" %}</button>
+        <a href="{{ request.path }}" class="btn btn-outline btn-block mt-1">{% trans "Reset" %}</a>
+      </form>
+    </aside>
+
+    <section class="card">
+      <div class="listing-top">
+        <div>
+          <h1 style="font-size:20px;margin:0">{% if category %}{{ category|tr:"name" }}{% elif q %}{% blocktrans %}Results for “{{ q }}”{% endblocktrans %}{% else %}{% trans "All Products" %}{% endif %}</h1>
+          <span class="muted" style="font-size:13px">{% blocktrans with n=total %}{{ n }} items found{% endblocktrans %}</span>
+        </div>
+        <div style="display:flex;gap:.5rem;align-items:center">
+          <button type="button" class="btn btn-outline btn-sm filter-toggle" data-toggle-filters><i class="fa-solid fa-filter"></i> {% trans "Filter" %}</button>
+          <form method="get">
+            {% for key, values in request.GET.lists %}{% if key != "sort" and key != "page" %}{% for v in values %}<input type="hidden" name="{{ key }}" value="{{ v }}">{% endfor %}{% endif %}{% endfor %}
+            <label class="sr-only" for="sort">{% trans "Sort by" %}</label>
+            <select id="sort" name="sort" class="form-control js-filter-auto">
+              {% for key, label in sort_options.items %}<option value="{{ key }}" {% if key == sort %}selected{% endif %}>{{ label }}</option>{% endfor %}
+            </select>
+          </form>
+        </div>
+      </div>
+
+      {% if products %}
+      <div class="product-grid">
+        {% for p in products %}{% include "partials/product_card.html" %}{% endfor %}
+      </div>
+      {% include "partials/pagination.html" %}
+      {% else %}
+      <div class="empty">
+        <i class="fa-solid fa-box-open"></i>
+        <h3>{% trans "No products found" %}</h3>
+        <p>{% trans "Try a different search or remove some filters." %}</p>
+        <a href="{% url 'store:product_list' %}" class="btn btn-primary">{% trans "Browse all products" %}</a>
+      </div>
+      {% endif %}
+    </section>
+  </div>
+</div>
+{% endblock %}

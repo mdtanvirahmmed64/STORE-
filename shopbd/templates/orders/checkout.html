@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load i18n shop_tags %}
+{% block title %}{% trans "Checkout" %} | {{ site.site_name }}{% endblock %}
+{% block content %}
+<div class="container">
+  <h1 class="page-title"><i class="fa-solid fa-lock" style="color:var(--success)"></i> {% trans "Checkout" %}</h1>
+  {% if not user.is_authenticated %}
+  <div class="card card-body mb-2" style="font-size:14px">
+    <i class="fa-regular fa-user"></i> {% trans "Already have an account?" %} <a class="btn-link" href="{% url 'accounts:login' %}?next={{ request.path }}">{% trans "Login" %}</a> {% trans "for faster checkout — or continue as guest." %}
+  </div>
+  {% endif %}
+
+  <form method="post" id="checkout-form" novalidate
+        data-subtotal="{{ cart.subtotal|stringformat:'f' }}" data-discount="{{ cart.discount|stringformat:'f' }}"
+        data-ship-inside="{{ shipping_inside|stringformat:'f' }}" data-ship-outside="{{ shipping_outside|stringformat:'f' }}">
+    {% csrf_token %}
+    <div class="two-col">
+      <div>
+        <section class="card card-body mb-2">
+          <h3 class="card-title"><i class="fa-solid fa-location-dot" style="color:var(--primary)"></i> {% trans "Delivery Information" %}</h3>
+          {% if addresses %}
+          <p class="muted" style="font-size:13px;margin-bottom:.5rem">{% trans "Choose a saved address:" %}</p>
+          <div class="saved-addresses">
+            {% for a in addresses %}
+            <button type="button" class="addr-card {% if a.is_default %}active{% endif %}" data-full_name="{{ a.full_name }}" data-phone="{{ a.phone }}"
+                    data-division="{{ a.division }}" data-city="{{ a.city }}" data-area="{{ a.area }}" data-address_line="{{ a.address_line }}">
+              <strong>{{ a.full_name }}</strong>{{ a.phone }}<br>{{ a.address_line }}, {{ a.area }}, {{ a.city }}
+            </button>
+            {% endfor %}
+          </div>
+          {% endif %}
+          {% if form.non_field_errors %}<div class="errorlist">{{ form.non_field_errors }}</div>{% endif %}
+          <div class="form-row">
+            <div class="form-group">{{ form.full_name.label_tag }}{{ form.full_name }}{{ form.full_name.errors }}</div>
+            <div class="form-group">{{ form.phone.label_tag }}{{ form.phone }}{{ form.phone.errors }}</div>
+          </div>
+          <div class="form-group">{{ form.email.label_tag }}{{ form.email }}<span class="helptext">{% trans "Order confirmation will be sent here (optional)" %}</span>{{ form.email.errors }}</div>
+          <div class="form-row">
+            <div class="form-group">{{ form.division.label_tag }}{{ form.division }}{{ form.division.errors }}</div>
+            <div class="form-group">{{ form.city.label_tag }}{{ form.city }}{{ form.city.errors }}</div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">{{ form.area.label_tag }}{{ form.area }}{{ form.area.errors }}</div>
+            <div class="form-group">{{ form.address_line.label_tag }}{{ form.address_line }}{{ form.address_line.errors }}</div>
+          </div>
+          <div class="form-group">
+            <span class="form-label">{% trans "Delivery area" %}</span>
+            <div class="radio-cards">{{ form.delivery_area }}</div>
+            <span class="helptext">{% trans "Inside Dhaka" %} {{ site.shipping_inside_dhaka|taka }} · {% trans "Outside Dhaka" %} {{ site.shipping_outside_dhaka|taka }}{% if site.free_shipping_over %} · {% blocktrans with amount=site.free_shipping_over|taka %}Free over {{ amount }}{% endblocktrans %}{% endif %}</span>
+          </div>
+          <div class="form-group">{{ form.note.label_tag }}{{ form.note }}</div>
+          {% if user.is_authenticated %}<label style="font-size:14px">{{ form.save_address }} {{ form.save_address.label }}</label>{% endif %}
+        </section>
+
+        <section class="card card-body">
+          <h3 class="card-title"><i class="fa-solid fa-credit-card" style="color:var(--primary)"></i> {% trans "Payment Method" %}</h3>
+          <div class="radio-cards">{{ form.payment_method }}</div>
+          {{ form.payment_method.errors }}
+          <div class="pay-info hidden" data-method="cod"><i class="fa-solid fa-money-bill-wave"></i> {% trans "Pay with cash when the product is delivered to you." %}</div>
+          <div class="pay-info hidden" data-method="bkash">
+            <strong>{% trans "bKash payment steps:" %}</strong>
+            <ol style="margin:.4rem 0 0;padding-inline-start:1.2rem">
+              <li>{% trans "Open the bKash app and tap “Send Money”" %}</li>
+              <li>{% trans "Send" %} <b class="js-pay-amount"></b> {% trans "to" %} <b dir="ltr">{{ site.bkash_number }}</b></li>
+              <li>{% trans "Enter your bKash number and the Transaction ID below" %}</li>
+            </ol>
+          </div>
+          <div class="pay-info hidden" data-method="nagad">
+            <strong>{% trans "Nagad payment steps:" %}</strong>
+            <ol style="margin:.4rem 0 0;padding-inline-start:1.2rem">
+              <li>{% trans "Open the Nagad app and tap “Send Money”" %}</li>
+              <li>{% trans "Send" %} <b class="js-pay-amount"></b> {% trans "to" %} <b dir="ltr">{{ site.nagad_number }}</b></li>
+              <li>{% trans "Enter your Nagad number and the Transaction ID below" %}</li>
+            </ol>
+          </div>
+          <div class="form-row mt-2 mobile-pay-fields hidden">
+            <div class="form-group">{{ form.sender_number.label_tag }}{{ form.sender_number }}{{ form.sender_number.errors }}</div>
+            <div class="form-group">{{ form.transaction_id.label_tag }}{{ form.transaction_id }}{{ form.transaction_id.errors }}</div>
+          </div>
+        </section>
+      </div>
+
+      <aside class="card summary">
+        <div class="card-body">
+          <h3 class="card-title">{% trans "Your Order" %}</h3>
+          {% for item in cart %}
+          <div class="mini-item">
+            <img src="{{ item.product.image.url }}" alt="">
+            <div>{{ item.product|tr:"name"|truncatechars:38 }}{% if item.variation_text %}<br><span class="q">{{ item.variation_text }}</span>{% endif %}<br><span class="q">{% trans "Qty" %}: {{ item.quantity }}</span></div>
+            <span class="t">{{ item.total_price|taka }}</span>
+          </div>
+          {% endfor %}
+          <hr style="border:0;border-top:1px solid var(--border)">
+          <div class="summary-row"><span>{% trans "Subtotal" %}</span><span>{{ cart.subtotal|taka }}</span></div>
+          {% if coupon %}<div class="summary-row" style="color:var(--success)"><span>{% trans "Coupon" %} ({{ coupon.code }})</span><span>−{{ cart.discount|taka }}</span></div>{% endif %}
+          <div class="summary-row"><span>{% trans "Delivery" %}</span><span id="sum-shipping">{% if shipping %}{{ shipping|taka }}{% else %}{% trans "Free" %}{% endif %}</span></div>
+          <div class="summary-row total"><span>{% trans "Total" %}</span><span id="sum-total">{{ total|taka }}</span></div>
+          <button type="submit" class="btn btn-primary btn-lg btn-block mt-2"><i class="fa-solid fa-check"></i> {% trans "Place Order" %}</button>
+          <p class="muted text-center mt-1" style="font-size:12px">{% trans "By placing your order you agree to our terms & conditions." %}</p>
+        </div>
+      </aside>
+    </div>
+  </form>
+</div>
+{% endblock %}

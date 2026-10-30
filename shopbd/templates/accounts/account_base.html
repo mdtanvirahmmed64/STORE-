@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+<div class="container">
+  <div class="account">
+    <aside class="account-nav">
+      <div class="user">
+        <span class="avatar">{% if user.profile.avatar %}<img src="{{ user.profile.avatar.url }}" alt="">{% else %}{{ user.first_name|default:user.username|first|upper }}{% endif %}</span>
+        <div><strong>{{ user.get_full_name|default:user.username }}</strong><br><span class="muted" style="font-size:12px">{{ user.email }}</span></div>
+      </div>
+      {% with n=request.resolver_match.url_name %}
+      <a href="{% url 'accounts:dashboard' %}" class="{% if n == 'dashboard' %}active{% endif %}"><i class="fa-solid fa-gauge"></i> {% trans "Dashboard" %}</a>
+      <a href="{% url 'orders:my_orders' %}" class="{% if n == 'my_orders' %}active{% endif %}"><i class="fa-solid fa-box"></i> {% trans "My Orders" %}</a>
+      <a href="{% url 'store:wishlist' %}"><i class="fa-regular fa-heart"></i> {% trans "Wishlist" %}</a>
+      <a href="{% url 'accounts:addresses' %}" class="{% if 'address' in n %}active{% endif %}"><i class="fa-solid fa-location-dot"></i> {% trans "Address Book" %}</a>
+      <a href="{% url 'accounts:profile' %}" class="{% if n == 'profile' %}active{% endif %}"><i class="fa-regular fa-user"></i> {% trans "Profile" %}</a>
+      <a href="{% url 'accounts:password_change' %}" class="{% if n == 'password_change' %}active{% endif %}"><i class="fa-solid fa-key"></i> {% trans "Change Password" %}</a>
+      {% endwith %}
+      <form method="post" action="{% url 'accounts:logout' %}">{% csrf_token %}<button type="submit"><i class="fa-solid fa-right-from-bracket"></i> {% trans "Logout" %}</button></form>
+    </aside>
+    <div>{% block account_content %}{% endblock %}</div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{{ title }} | {{ site.site_name }}{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="card auth-box"><div class="card-body text-center">
+    <div class="success-icon"><i class="fa-solid fa-check"></i></div>
+    <h1>{{ title }}</h1>
+    <p class="muted">{{ text }}</p>
+    {% if user.is_authenticated %}<a href="{% url 'accounts:dashboard' %}" class="btn btn-primary">{% trans "Go to my account" %}</a>
+    {% else %}<a href="{% url 'accounts:login' %}" class="btn btn-primary">{% trans "Login" %}</a>{% endif %}
+  </div></div>
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "pos/base_pos.html" %}
+{% load i18n shop_tags %}
+{% block title %}{% trans "Sales" %} — {{ branch.name }}{% endblock %}
+{% block body %}
+<div class="pos-page">
+  <div class="pos-page-head">
+    <h1><i class="fa-solid fa-receipt"></i> {% trans "Sales" %} — {{ branch.name }}</h1>
+    <form method="get" class="pos-filter">
+      <input type="hidden" name="branch" value="{{ branch.pk }}">
+      <label>{% trans "From" %} <input type="date" name="from" value="{{ date_from|date:'Y-m-d' }}" class="form-control"></label>
+      <label>{% trans "To" %} <input type="date" name="to" value="{{ date_to|date:'Y-m-d' }}" class="form-control"></label>
+      <input type="search" name="q" value="{{ q }}" class="form-control" placeholder="{% trans 'Receipt no. / phone / name' %}">
+      <button class="btn btn-primary" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </form>
+  </div>
+  {% if not is_manager %}<p class="muted">{% trans "You are seeing only your own sales." %}</p>{% endif %}
+
+  <div class="stat-grid mb-2">
+    <div class="stat"><span class="ic green"><i class="fa-solid fa-sack-dollar"></i></span><div><strong>{{ summary.total|default:0|taka }}</strong><span>{% trans "Total sales" %}</span></div></div>
+    <div class="stat"><span class="ic blue"><i class="fa-solid fa-receipt"></i></span><div><strong>{{ summary.count }}</strong><span>{% trans "Receipts" %}</span></div></div>
+    <div class="stat"><span class="ic yellow"><i class="fa-solid fa-tags"></i></span><div><strong>{{ summary.discount|default:0|taka }}</strong><span>{% trans "Discount given" %}</span></div></div>
+    {% for label, amount in by_method %}<div class="stat"><span class="ic"><i class="fa-solid fa-wallet"></i></span><div><strong>{{ amount|taka }}</strong><span>{{ label }}</span></div></div>{% endfor %}
+  </div>
+
+  <section class="card">
+    <div class="table-wrap"><table class="table">
+      <thead><tr><th>{% trans "Receipt" %}</th><th>{% trans "Time" %}</th><th>{% trans "Customer" %}</th><th>{% trans "Items" %}</th><th>{% trans "Total" %}</th><th>{% trans "Payment" %}</th><th>{% trans "Cashier" %}</th><th>{% trans "Status" %}</th><th></th></tr></thead>
+      <tbody>
+      {% for s in sales %}
+        <tr>
+          <td><a href="{{ s.get_absolute_url }}" style="color:var(--primary);font-weight:600">{{ s.number }}</a></td>
+          <td>{{ s.created_at|date:"d M, h:i A" }}</td>
+          <td>{{ s.customer_name|default:"—" }}<br><small class="muted" dir="ltr">{{ s.customer_phone }}</small></td>
+          <td>{{ s.item_count }}</td>
+          <td><strong>{{ s.total|taka }}</strong>{% if s.discount %}<br><small class="muted">−{{ s.discount|taka }}</small>{% endif %}</td>
+          <td>{{ s.get_payment_method_display }}</td>
+          <td>{{ s.cashier.username|default:"—" }}</td>
+          <td><span class="badge badge-{% if s.status == 'returned' %}danger{% else %}success{% endif %}">{{ s.get_status_display }}</span></td>
+          <td style="white-space:nowrap">
+            <a class="btn btn-outline btn-sm" href="{{ s.get_absolute_url }}?print=1"><i class="fa-solid fa-print"></i> {% trans "Reprint" %}</a>
+            {% if is_manager and s.status == "completed" %}
+            <form method="post" action="{% url 'pos:sale_return' s.number %}" style="display:inline" data-confirm="{% trans 'Return this whole sale? Stock will be added back.' %}">{% csrf_token %}
+              <button class="btn btn-outline btn-sm" style="color:var(--danger)" type="submit">{% trans "Return" %}</button></form>
+            {% endif %}
+          </td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="9"><div class="empty" style="padding:2rem"><p>{% trans "No sales in this period." %}</p></div></td></tr>
+      {% endfor %}
+      </tbody>
+    </table></div>
+    {% include "partials/pagination.html" %}
+  </section>
+</div>
+{% endblock %}

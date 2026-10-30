@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load i18n shop_tags %}
+{% block title %}{% trans "Shopping Cart" %} | {{ site.site_name }}{% endblock %}
+{% block content %}
+<div class="container">
+  <h1 class="page-title"><i class="fa-solid fa-cart-shopping" style="color:var(--primary)"></i> {% trans "Shopping Cart" %}</h1>
+  {% if cart.items %}
+  <div class="two-col">
+    <section class="card">
+      {% for item in cart %}
+      <div class="cart-item">
+        <a href="{{ item.product.get_absolute_url }}"><img src="{{ item.product.image.url }}" alt="{{ item.product|tr:'name' }}"></a>
+        <div>
+          <a href="{{ item.product.get_absolute_url }}" class="name">{{ item.product|tr:"name" }}</a>
+          {% if item.variation_text %}<div class="muted" style="font-size:13px">{{ item.variation_text }}</div>{% endif %}
+          <div class="muted" style="font-size:13px">{% blocktrans with price=item.unit_price|taka %}{{ price }} each{% endblocktrans %}</div>
+        </div>
+        <form method="post" action="{% url 'cart:update' %}" class="js-auto-submit qty-cell">{% csrf_token %}
+          <input type="hidden" name="key" value="{{ item.key }}">
+          <div class="qty">
+            <button type="button" data-step="-" aria-label="{% trans 'Decrease' %}">−</button>
+            <input type="number" name="quantity" value="{{ item.quantity }}" min="1" max="{{ item.product.stock }}" aria-label="{% trans 'Quantity' %}">
+            <button type="button" data-step="+" aria-label="{% trans 'Increase' %}">+</button>
+          </div>
+        </form>
+        <strong class="price unit">{{ item.total_price|taka }}</strong>
+        <form method="post" action="{% url 'cart:remove' %}">{% csrf_token %}
+          <input type="hidden" name="key" value="{{ item.key }}">
+          <button class="remove-btn" type="submit" aria-label="{% trans 'Remove' %}"><i class="fa-regular fa-trash-can"></i></button>
+        </form>
+      </div>
+      {% endfor %}
+      <div class="card-body"><a href="{% url 'store:product_list' %}" class="btn btn-outline"><i class="fa-solid fa-arrow-left flip-rtl"></i> {% trans "Continue shopping" %}</a></div>
+    </section>
+
+    <aside class="card summary">
+      <div class="card-body">
+        <h3 class="card-title">{% trans "Order Summary" %}</h3>
+        <div class="summary-row"><span>{% blocktrans with n=cart|length %}Subtotal ({{ n }} items){% endblocktrans %}</span><span>{{ cart.subtotal|taka }}</span></div>
+        {% if coupon %}
+        <div class="summary-row" style="color:var(--success)"><span>{% trans "Discount" %} ({{ coupon.code }})</span><span>−{{ cart.discount|taka }}</span></div>
+        {% endif %}
+        <div class="summary-row"><span>{% trans "Delivery (inside Dhaka)" %}</span><span>{% with s=cart.shipping_cost %}{% if s %}{{ s|taka }}{% else %}{% trans "Free" %}{% endif %}{% endwith %}</span></div>
+        <div class="summary-row total"><span>{% trans "Total" %}</span><span>{{ cart.total|taka }}</span></div>
+        {% if site.free_shipping_over and cart.subtotal < site.free_shipping_over %}
+        <p class="muted" style="font-size:13px"><i class="fa-solid fa-truck"></i> {% blocktrans with amount=site.free_shipping_over|taka %}Add more for free delivery over {{ amount }}{% endblocktrans %}</p>
+        {% endif %}
+
+        {% if coupon %}
+        <div class="applied-coupon">
+          <span><i class="fa-solid fa-ticket"></i> {% blocktrans with code=coupon.code %}<strong>{{ code }}</strong> applied{% endblocktrans %}</span>
+          <form method="post" action="{% url 'cart:remove_coupon' %}">{% csrf_token %}<button class="btn-link btn" type="submit">{% trans "Remove" %}</button></form>
+        </div>
+        {% else %}
+        <form method="post" action="{% url 'cart:apply_coupon' %}" class="coupon-form">{% csrf_token %}
+          <input class="form-control" name="code" placeholder="{% trans 'Coupon code' %}" required>
+          <button class="btn btn-dark" type="submit">{% trans "Apply" %}</button>
+        </form>
+        {% endif %}
+        <a href="{% url 'orders:checkout' %}" class="btn btn-primary btn-lg btn-block">{% trans "Proceed to Checkout" %} <i class="fa-solid fa-arrow-right flip-rtl"></i></a>
+      </div>
+    </aside>
+  </div>
+  {% else %}
+  <section class="card"><div class="empty">
+    <i class="fa-solid fa-cart-arrow-down"></i><h3>{% trans "Your cart is empty" %}</h3>
+    <p>{% trans "Looks like you haven't added anything yet." %}</p>
+    <a href="{% url 'store:product_list' %}" class="btn btn-primary">{% trans "Start shopping" %}</a>
+  </div></section>
+  {% endif %}
+</div>
+{% endblock %}

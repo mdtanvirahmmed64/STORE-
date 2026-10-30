@@ -1,0 +1,38 @@
+{% extends "accounts/account_base.html" %}
+{% load i18n shop_tags %}
+{% block title %}{% trans "My Account" %} | {{ site.site_name }}{% endblock %}
+{% block account_content %}
+<h1 class="page-title" style="margin-top:0">{% blocktrans with name=user.first_name|default:user.username %}Hello, {{ name }}{% endblocktrans %} 👋</h1>
+<div class="stat-grid mb-2">
+  <div class="stat"><span class="ic"><i class="fa-solid fa-box"></i></span><div><strong>{{ order_count }}</strong><span>{% trans "Total orders" %}</span></div></div>
+  <div class="stat"><span class="ic yellow"><i class="fa-solid fa-truck"></i></span><div><strong>{{ pending_count }}</strong><span>{% trans "In progress" %}</span></div></div>
+  <div class="stat"><span class="ic green"><i class="fa-solid fa-circle-check"></i></span><div><strong>{{ delivered_count }}</strong><span>{% trans "Delivered" %}</span></div></div>
+  <div class="stat"><span class="ic blue"><i class="fa-regular fa-heart"></i></span><div><strong>{{ wishlist_count }}</strong><span>{% trans "Wishlist" %}</span></div></div>
+</div>
+
+<div class="two-col dash-cols">
+  <section class="card">
+    <div class="section-head"><h2><i class="fa-solid fa-clock-rotate-left"></i> {% trans "Recent orders" %}</h2><a href="{% url 'orders:my_orders' %}" class="btn btn-outline btn-sm">{% trans "View all" %}</a></div>
+    {% if recent_orders %}
+    <div class="table-wrap"><table class="table">
+      <thead><tr><th>{% trans "Order" %}</th><th>{% trans "Date" %}</th><th>{% trans "Total" %}</th><th>{% trans "Status" %}</th></tr></thead>
+      <tbody>{% for o in recent_orders %}
+        <tr><td><a href="{% url 'orders:detail' o.order_number %}" style="color:var(--primary);font-weight:600">{{ o.order_number }}</a></td>
+          <td>{{ o.created_at|date:"d M Y" }}</td><td>{{ o.total|taka }}</td>
+          <td><span class="badge badge-{{ o.status|status_color }}">{{ o.get_status_display }}</span></td></tr>
+      {% endfor %}</tbody>
+    </table></div>
+    {% else %}<div class="empty" style="padding:2rem"><p>{% trans "No orders yet" %}</p><a href="{% url 'store:product_list' %}" class="btn btn-primary">{% trans "Start shopping" %}</a></div>{% endif %}
+  </section>
+  <section class="card card-body">
+    <h3 class="card-title">{% trans "Default address" %}</h3>
+    {% if default_address %}
+    <p style="font-size:14px"><strong>{{ default_address.full_name }}</strong><br><span dir="ltr">{{ default_address.phone }}</span><br>{{ default_address.address_line }}, {{ default_address.area }}<br>{{ default_address.city }}, {{ default_address.get_division_display }}</p>
+    <a href="{% url 'accounts:addresses' %}" class="btn btn-outline btn-sm">{% trans "Manage" %}</a>
+    {% else %}
+    <p class="muted">{% trans "No address saved yet." %}</p>
+    <a href="{% url 'accounts:address_add' %}" class="btn btn-primary btn-sm">{% trans "Add address" %}</a>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

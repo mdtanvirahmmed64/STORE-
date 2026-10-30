@@ -1,0 +1,38 @@
+{% load i18n shop_tags %}{% with pname=p|tr:"name" %}<div class="product-card">
+  <a href="{{ p.get_absolute_url }}" class="pc-img">
+    {% if not p.in_stock %}<span class="pc-badge out">{% trans "Out of stock" %}</span>
+    {% elif p.has_discount %}<span class="pc-badge">-{{ p.discount_percent }}%</span>{% endif %}
+    <img src="{{ p.image.url }}" alt="{{ pname }}" loading="lazy">
+  </a>
+  <button type="button" class="pc-wish js-wish {% if p.id in wish_ids %}active{% endif %}" aria-label="{% trans 'Wishlist' %}"
+          data-url="{% url 'store:wishlist_toggle' p.id %}" data-login="{% url 'accounts:login' %}?next={{ request.path }}"
+          {% if remove_on_unwish %}data-remove-card="1"{% endif %}>
+    <i class="{% if p.id in wish_ids or remove_on_unwish %}fa-solid{% else %}fa-regular{% endif %} fa-heart"></i>
+  </button>
+  <div class="pc-body">
+    <a href="{{ p.get_absolute_url }}" class="pc-title">{{ pname }}</a>
+    <div class="pc-price">
+      <span class="price">{{ p.final_price|taka }}</span>
+      {% if p.has_discount %}<span class="old-price">{{ p.price|taka }}</span>{% endif %}
+    </div>
+    <div class="pc-meta">
+      {% stars p.rating %} <span>({{ p.review_count }})</span>
+      {% if p.sold_count %}<span>· {% blocktrans with n=p.sold_count %}{{ n }} sold{% endblocktrans %}</span>{% endif %}
+    </div>
+    <div class="pc-cart">
+      {% if p.in_stock %}
+        {% if p.variations.all %}
+        <a href="{{ p.get_absolute_url }}" class="btn btn-outline"><i class="fa-solid fa-sliders"></i> {% trans "Choose options" %}</a>
+        {% else %}
+        <form method="post" action="{% url 'cart:add' p.id %}" class="js-add-cart">{% csrf_token %}
+          <input type="hidden" name="quantity" value="1">
+          <input type="hidden" name="next" value="{{ request.get_full_path }}">
+          <button type="submit" class="btn btn-primary"><i class="fa-solid fa-cart-plus"></i> {% trans "Add to cart" %}</button>
+        </form>
+        {% endif %}
+      {% else %}
+        <button class="btn btn-outline" disabled>{% trans "Out of stock" %}</button>
+      {% endif %}
+    </div>
+  </div>
+</div>{% endwith %}

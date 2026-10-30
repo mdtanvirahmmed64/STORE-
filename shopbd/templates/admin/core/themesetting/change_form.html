@@ -1,0 +1,132 @@
+{% extends "admin/change_form.html" %}
+{% block extrastyle %}{{ block.super }}
+<style>
+  .theme-wrap { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 24px; align-items: start; }
+  .theme-preview { position: sticky; top: 20px; border: 1px solid var(--hairline-color); border-radius: 12px; overflow: hidden; font-family: var(--pv-font); background: var(--pv-bg); color: var(--pv-text); box-shadow: 0 6px 24px rgba(0,0,0,.08); }
+  .theme-preview h3 { margin: 0; padding: 10px 14px; font-size: 13px; background: var(--darkened-bg); color: var(--body-quiet-color); text-transform: uppercase; letter-spacing: .5px; font-family: inherit; }
+  .pv-top { background: var(--pv-secondary); color: var(--pv-on-secondary); font-size: 11px; padding: 6px 12px; }
+  .pv-head { background: var(--pv-header); color: var(--pv-header-text); padding: 12px; display: flex; gap: 10px; align-items: center; font-weight: 800; font-size: 18px; }
+  .pv-search { flex: 1; display: flex; background: #fff; border-radius: var(--pv-radius); overflow: hidden; height: 30px; }
+  .pv-search span { flex: 1; } .pv-search b { width: 34px; background: var(--pv-accent); }
+  .pv-body { padding: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .pv-card { background: #fff; border-radius: var(--pv-radius); overflow: hidden; border: 1px solid #e6e8ec; position: relative; }
+  .pv-img { height: 90px; background: linear-gradient(135deg, var(--pv-primary-soft), #fff); }
+  .pv-badge { position: absolute; top: 6px; left: 6px; background: var(--pv-discount); color: #fff; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; }
+  .pv-info { padding: 8px; font-size: 12px; }
+  .pv-price { color: var(--pv-primary); font-weight: 800; font-size: 15px; margin: 2px 0; }
+  .pv-stars { color: var(--pv-accent); font-size: 11px; }
+  .pv-btn { display: block; text-align: center; padding: 6px; border-radius: calc(var(--pv-radius) * .8); font-weight: 700; font-size: 12px; margin-top: 6px; }
+  .pv-btn.p { background: var(--pv-primary); color: var(--pv-on-primary); }
+  .pv-btn.a { background: var(--pv-accent); color: var(--pv-on-accent); }
+  .pv-foot { background: var(--pv-footer); color: var(--pv-footer-text); padding: 12px; font-size: 11px; }
+  .preset-swatches { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 4px; }
+  .preset-swatches button { border: 2px solid transparent; border-radius: 8px; padding: 4px; cursor: pointer; background: var(--body-bg); display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--body-fg); }
+  .preset-swatches button.active { border-color: var(--primary); }
+  .preset-swatches i { display: inline-block; width: 14px; height: 22px; border-radius: 3px; }
+  input.theme-color { width: 70px; height: 38px; padding: 2px; cursor: pointer; vertical-align: middle; }
+  .hex-label { font-family: monospace; margin-left: 8px; color: var(--body-quiet-color); }
+  .theme-help { background: var(--message-info-bg, #e3f1ff); padding: 10px 14px; border-radius: 6px; margin-bottom: 14px; }
+  @media (max-width: 1000px) { .theme-wrap { grid-template-columns: 1fr; } .theme-preview { position: static; } }
+</style>
+{% endblock %}
+
+{% block field_sets %}
+<div class="theme-help">🎨 একটি রেডিমেড থিমে ক্লিক করুন অথবা নিচের যেকোনো রঙের বক্সে ক্লিক করে নিজের পছন্দের রং বেছে নিন। ডানে সাথে সাথে প্রিভিউ দেখবেন। শেষে <b>SAVE</b> চাপুন।</div>
+<div class="theme-wrap">
+  <div>
+    <div class="preset-swatches" id="preset-swatches"></div>
+    {{ block.super }}
+  </div>
+  <div class="theme-preview" id="theme-preview">
+    <h3>Live preview</h3>
+    <div class="pv-top">Free delivery on orders over ৳2000!</div>
+    <div class="pv-head"><span>ShopBD</span><div class="pv-search"><span></span><b></b></div></div>
+    <div class="pv-body">
+      <div class="pv-card"><span class="pv-badge">-25%</span><div class="pv-img"></div>
+        <div class="pv-info">Wireless Earbuds<div class="pv-price">৳2,299</div><div class="pv-stars">★★★★☆</div><span class="pv-btn p">Add to cart</span></div></div>
+      <div class="pv-card"><span class="pv-badge">-10%</span><div class="pv-img"></div>
+        <div class="pv-info">Cotton Panjabi<div class="pv-price">৳1,890</div><div class="pv-stars">★★★★★</div><span class="pv-btn a">Buy Now</span></div></div>
+    </div>
+    <div class="pv-foot"><b>ShopBD</b> · About · Contact · Privacy</div>
+  </div>
+</div>
+{% endblock %}
+
+{% block submit_buttons_bottom %}
+{{ block.super }}
+<div class="submit-row" style="margin-top:-8px">
+  <input type="submit" name="_reset" value="↺ Reset to default colors" onclick="return confirm('Reset all colors to the default orange theme?')">
+  <a href="/" target="_blank" class="button" style="padding:10px 15px">👁 View website</a>
+</div>
+{% endblock %}
+
+{% block admin_change_form_document_ready %}
+{{ block.super }}
+<script>
+(function () {
+  const PRESETS = {{ presets_json|safe }};
+  const FIELDS = {{ preset_fields_json|safe }};
+  const NAMES = {orange:"Daraz Orange", amazon:"Amazon Dark", green:"Green", blue:"Blue", purple:"Purple", red:"Red", pink:"Pink", teal:"Teal", black:"Black"};
+  const $ = (id) => document.getElementById(id);
+  const preview = $("theme-preview");
+  const presetSel = $("id_preset");
+
+  function rgb(h) { h = h.replace("#", ""); return [0, 2, 4].map((i) => parseInt(h.substr(i, 2), 16)); }
+  function mix(a, b, t) { const x = rgb(a), y = rgb(b); return "#" + x.map((v, i) => Math.round(v + (y[i] - v) * t).toString(16).padStart(2, "0")).join(""); }
+  function lum(h) { return rgb(h).map((c) => { c /= 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); }).reduce((s, c, i) => s + c * [0.2126, 0.7152, 0.0722][i], 0); }
+  function on(bg) { return lum(bg) > 0.45 ? "#1f2430" : "#ffffff"; }
+  function val(f) { return ($("id_" + f) || {}).value || "#000000"; }
+
+  function update() {
+    const s = preview.style;
+    s.setProperty("--pv-primary", val("primary_color"));
+    s.setProperty("--pv-primary-soft", mix(val("primary_color"), "#ffffff", 0.75));
+    s.setProperty("--pv-on-primary", on(val("primary_color")));
+    s.setProperty("--pv-header", val("header_bg"));
+    s.setProperty("--pv-header-text", val("header_text"));
+    s.setProperty("--pv-secondary", val("secondary_color"));
+    s.setProperty("--pv-on-secondary", on(val("secondary_color")));
+    s.setProperty("--pv-accent", val("accent_color"));
+    s.setProperty("--pv-on-accent", on(val("accent_color")));
+    s.setProperty("--pv-discount", val("discount_color"));
+    s.setProperty("--pv-bg", val("page_bg"));
+    s.setProperty("--pv-text", val("text_color"));
+    s.setProperty("--pv-footer", val("footer_bg"));
+    s.setProperty("--pv-footer-text", mix(on(val("footer_bg")), val("footer_bg"), 0.3));
+    s.setProperty("--pv-radius", (($("id_corner_radius") || {}).value || 10) + "px");
+    const font = ($("id_font") || {}).value || "Inter";
+    s.setProperty("--pv-font", font === "system" ? "system-ui, sans-serif" : `'${font}', system-ui, sans-serif`);
+    FIELDS.forEach((f) => { const l = $("hex_" + f); if (l) l.textContent = val(f).toUpperCase(); });
+    document.querySelectorAll("#preset-swatches button").forEach((b) => b.classList.toggle("active", b.dataset.preset === presetSel.value));
+  }
+
+  function applyPreset(name) {
+    const p = PRESETS[name]; if (!p) return;
+    FIELDS.forEach((f) => { if ($("id_" + f)) $("id_" + f).value = p[f]; });
+    presetSel.value = name;
+    update();
+  }
+
+  // preset buttons with color swatches
+  const box = $("preset-swatches");
+  Object.keys(PRESETS).forEach((name) => {
+    const p = PRESETS[name], b = document.createElement("button");
+    b.type = "button"; b.dataset.preset = name;
+    b.innerHTML = `<i style="background:${p.header_bg}"></i><i style="background:${p.primary_color}"></i><i style="background:${p.accent_color}"></i>${NAMES[name] || name}`;
+    b.addEventListener("click", () => applyPreset(name));
+    box.appendChild(b);
+  });
+
+  FIELDS.forEach((f) => {
+    const input = $("id_" + f); if (!input) return;
+    const label = document.createElement("span"); label.className = "hex-label"; label.id = "hex_" + f;
+    input.after(label);
+    input.addEventListener("input", () => { presetSel.value = "custom"; update(); });
+  });
+  presetSel.addEventListener("change", () => applyPreset(presetSel.value));
+  ["id_corner_radius", "id_font"].forEach((id) => $(id) && $(id).addEventListener("input", update));
+  update();
+})();
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Poppins:wght@400;700;800&family=Roboto:wght@400;700&family=Hind+Siliguri:wght@400;700&display=swap" rel="stylesheet">
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends "pos/base_pos.html" %}
+{% load i18n shop_tags %}
+{% block title %}{% trans "Branch dashboard" %}{% endblock %}
+{% block body %}
+<div class="pos-page">
+  <div class="pos-page-head">
+    <h1><i class="fa-solid fa-chart-column"></i> {% trans "Branch dashboard" %}</h1>
+    <span class="muted">{{ today|date:"d M Y" }}</span>
+  </div>
+
+  <div class="stat-grid mb-2">
+    <div class="stat"><span class="ic"><i class="fa-solid fa-store"></i></span><div><strong>{{ shop_today|taka }}</strong><span>{% trans "Shop sales today" %}</span></div></div>
+    <div class="stat"><span class="ic green"><i class="fa-solid fa-calendar"></i></span><div><strong>{{ shop_month|taka }}</strong><span>{% trans "Shop sales, last 30 days" %}</span></div></div>
+    {% if show_online %}
+    <div class="stat"><span class="ic blue"><i class="fa-solid fa-globe"></i></span><div><strong>{{ online_today.s|default:0|taka }}</strong><span>{% trans "Online orders today" %} ({{ online_today.n }})</span></div></div>
+    <div class="stat"><span class="ic yellow"><i class="fa-solid fa-chart-line"></i></span><div><strong>{{ online_month.s|default:0|taka }}</strong><span>{% trans "Online, last 30 days" %}</span></div></div>
+    {% endif %}
+  </div>
+
+  <section class="card mb-2">
+    <div class="section-head"><h2><i class="fa-solid fa-code-branch"></i> {% trans "Branches" %}</h2>
+      {% if user.is_superuser %}<a class="btn btn-outline btn-sm" href="{% url 'admin:pos_branch_add' %}"><i class="fa-solid fa-plus"></i> {% trans "Add branch" %}</a>{% endif %}</div>
+    <div class="table-wrap"><table class="table">
+      <thead><tr><th>{% trans "Branch" %}</th><th>{% trans "Today" %}</th><th>{% trans "Receipts today" %}</th><th>{% trans "Last 30 days" %}</th><th>{% trans "Average sale" %}</th><th>{% trans "Units in stock" %}</th><th>{% trans "Low stock" %}</th><th></th></tr></thead>
+      <tbody>{% for r in rows %}
+        <tr>
+          <td><strong>{{ r.branch.name }}</strong> <span class="badge badge-muted">{{ r.branch.code }}</span></td>
+          <td><strong>{{ r.today|taka }}</strong></td><td>{{ r.today_n }}</td>
+          <td>{{ r.month|taka }} <small class="muted">({{ r.month_n }})</small></td>
+          <td>{{ r.avg|taka }}</td><td>{{ r.stock_units }}</td>
+          <td>{% if r.low %}<span class="badge badge-warning">{{ r.low }}</span>{% else %}<span class="badge badge-success">0</span>{% endif %}</td>
+          <td style="white-space:nowrap"><a class="btn btn-primary btn-sm" href="{% url 'pos:terminal' %}?branch={{ r.branch.pk }}">POS</a>
+            <a class="btn btn-outline btn-sm" href="{% url 'pos:sales' %}?branch={{ r.branch.pk }}">{% trans "Sales" %}</a></td>
+        </tr>
+      {% empty %}<tr><td colspan="8" class="muted">{% trans "No branches yet." %}</td></tr>{% endfor %}</tbody>
+    </table></div>
+  </section>
+
+  <section class="card card-body mb-2">
+    <h3 class="card-title">{% trans "Sales — last 14 days" %}</h3>
+    <div class="legend">{% for name in legend %}<span><i class="sw sw-{{ forloop.counter0 }}"></i>{{ name }}</span>{% endfor %}</div>
+    <div class="stack-chart" dir="ltr">
+      {% for c in chart %}
+      <div class="col" title="{{ c.label }}: ৳{{ c.total|floatformat:0 }}">
+        <div class="stack">{% for p in c.parts %}<span class="seg sw-{{ forloop.counter0 }}" style="height:{{ p.pct }}%" title="{{ p.name }}: ৳{{ p.value|floatformat:0 }}"></span>{% endfor %}</div>
+        <small>{{ c.label }}</small>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <div class="dash-grid">
+    <section class="card card-body">
+      <h3 class="card-title">{% trans "Top products in shops (30 days)" %}</h3>
+      {% for t in top_products %}<div class="summary-row"><span>{{ t.product_name|truncatechars:34 }}</span><strong>{% blocktrans with n=t.qty %}{{ n }} sold{% endblocktrans %}</strong></div>
+      {% empty %}<p class="muted">{% trans "No sales yet." %}</p>{% endfor %}
+    </section>
+    <section class="card card-body">
+      <h3 class="card-title">{% trans "Cashiers today" %}</h3>
+      {% for c in cashiers %}<div class="summary-row"><span>{{ c.cashier__username|default:"—" }} <span class="badge badge-muted">{{ c.branch__code }}</span></span><strong>{{ c.s|taka }} <small class="muted">({{ c.n }})</small></strong></div>
+      {% empty %}<p class="muted">{% trans "No sales yet." %}</p>{% endfor %}
+    </section>
+    <section class="card card-body">
+      <h3 class="card-title">{% trans "Payment methods (30 days)" %}</h3>
+      {% for label, amount in payments %}<div class="summary-row"><span>{{ label }}</span><strong>{{ amount|taka }}</strong></div>{% endfor %}
+    </section>
+    <section class="card card-body">
+      <h3 class="card-title" style="color:var(--danger)"><i class="fa-solid fa-triangle-exclamation"></i> {% trans "Low stock in branches" %}</h3>
+      {% for s in low_stock %}<div class="summary-row"><span>{{ s.product|tr:"name"|truncatechars:26 }} <span class="badge badge-muted">{{ s.branch.code }}</span></span><span class="badge badge-{% if s.quantity == 0 %}danger{% else %}warning{% endif %}">{% blocktrans with n=s.quantity %}{{ n }} left{% endblocktrans %}</span></div>
+      {% empty %}<p class="muted">{% trans "All products are well stocked." %}</p>{% endfor %}
+      {% if user.is_superuser %}<a class="btn btn-outline btn-sm mt-1" href="{% url 'admin:pos_stocktransfer_add' %}"><i class="fa-solid fa-right-left"></i> {% trans "Transfer stock" %}</a>{% endif %}
+    </section>
+  </div>
+</div>
+{% endblock %}

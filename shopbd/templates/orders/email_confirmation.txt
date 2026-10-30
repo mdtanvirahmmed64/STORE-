@@ -1,0 +1,22 @@
+{% load i18n shop_tags %}{% blocktrans with name=order.full_name %}Hi {{ name }},{% endblocktrans %}
+
+{% blocktrans with site_name=site.site_name %}Thank you for your order at {{ site_name }}!{% endblocktrans %}
+
+{% trans "Order number" %}: {{ order.order_number }}
+{% trans "Date" %}: {{ order.created_at|date:"d M Y, h:i A" }}
+{% trans "Payment" %}: {{ order.get_payment_method_display }}
+
+{% trans "Items" %}:
+{% for item in order.items.all %}- {{ item.product_name }}{% if item.variation %} ({{ item.variation }}){% endif %} x {{ item.quantity }} = {{ item.line_total|taka }}
+{% endfor %}
+{% trans "Subtotal" %}: {{ order.subtotal|taka }}
+{% trans "Discount" %}: {{ order.discount|taka }}
+{% trans "Delivery" %}: {{ order.shipping_cost|taka }}
+{% trans "Total" %}: {{ order.total|taka }}
+
+{% trans "Delivery address" %}:
+{{ order.address_line }}, {{ order.area }}, {{ order.city }}, {{ order.get_division_display }}
+
+{% blocktrans with phone=order.phone %}We will contact you at {{ phone }} soon.{% endblocktrans %}
+
+{{ site.site_name }} | {{ site.phone }}

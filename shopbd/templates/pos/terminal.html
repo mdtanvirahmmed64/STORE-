@@ -1,0 +1,99 @@
+{% extends "pos/base_pos.html" %}
+{% load i18n static %}
+{% block title %}{% trans "New sale" %} — {{ branch.name }}{% endblock %}
+{% block body %}
+<div class="pos-wrap">
+  <section class="pos-products">
+    <div class="pos-search">
+      <i class="fa-solid fa-barcode"></i>
+      <input id="pos-q" type="search" autocomplete="off" autofocus
+             placeholder="{% trans 'Search product name, or scan barcode / SKU (F2)' %}">
+    </div>
+    <div id="pos-grid" class="pos-grid" aria-live="polite"></div>
+  </section>
+
+  <aside class="pos-cart" id="pos-cart">
+    <div class="pos-cart-head">
+      <h2><i class="fa-solid fa-basket-shopping"></i> {% trans "Cart" %} <span id="cart-count" class="badge badge-primary">0</span></h2>
+      <button type="button" id="clear-cart" class="btn btn-link">{% trans "Clear" %}</button>
+    </div>
+    <div id="cart-lines" class="cart-lines"></div>
+
+    <div class="pos-totals">
+      <div class="summary-row"><span>{% trans "Subtotal" %}</span><span id="t-subtotal">৳0</span></div>
+      <div class="summary-row pos-discount">
+        <span>{% trans "Discount" %}{% if max_discount < 100 %} <small class="muted">(max {{ max_discount }}%)</small>{% endif %}</span>
+        <span class="disc-inputs">
+          <input id="disc-value" type="number" min="0" step="any" value="0" {% if not max_discount %}disabled{% endif %} aria-label="{% trans 'Discount' %}">
+          <select id="disc-type" {% if not max_discount %}disabled{% endif %} aria-label="{% trans 'Discount type' %}"><option value="amount">৳</option><option value="percent">%</option></select>
+        </span>
+      </div>
+      <div class="summary-row total"><span>{% trans "Total" %}</span><span id="t-total">৳0</span></div>
+    </div>
+
+    <div class="pos-pay">
+      <div class="pay-methods" role="radiogroup">
+        {% for key, label in payment_choices %}
+        <label><input type="radio" name="pay" value="{{ key }}" {% if forloop.first %}checked{% endif %}><span>{{ label }}</span></label>
+        {% endfor %}
+      </div>
+      <div id="cash-box">
+        <label class="form-label" for="paid">{% trans "Cash received" %}</label>
+        <div class="paid-row">
+          <input id="paid" type="number" min="0" step="any" class="form-control" inputmode="decimal">
+          <button type="button" class="btn btn-outline btn-sm" data-paid="exact">{% trans "Exact" %}</button>
+          <button type="button" class="btn btn-outline btn-sm" data-paid="500">500</button>
+          <button type="button" class="btn btn-outline btn-sm" data-paid="1000">1000</button>
+        </div>
+        <div class="change-row">{% trans "Change to return" %}: <strong id="t-change">৳0</strong></div>
+      </div>
+      <div id="trx-box" class="hidden">
+        <label class="form-label" for="trx">{% trans "Transaction ID" %}</label>
+        <input id="trx" class="form-control" autocomplete="off">
+      </div>
+      <details class="customer-box">
+        <summary>{% trans "Customer (optional)" %}</summary>
+        <div class="form-row">
+          <input id="c-name" class="form-control" placeholder="{% trans 'Name' %}">
+          <input id="c-phone" class="form-control" placeholder="{% trans 'Phone' %}" inputmode="tel">
+        </div>
+        <input id="note" class="form-control mt-1" placeholder="{% trans 'Note' %}">
+      </details>
+      <button type="button" id="complete" class="btn btn-primary btn-lg btn-block" disabled>
+        <i class="fa-solid fa-print"></i> {% trans "Complete sale & print receipt" %} <kbd>F9</kbd>
+      </button>
+      <div id="pos-error" class="pos-error hidden" role="alert"></div>
+    </div>
+  </aside>
+</div>
+
+<a href="#pos-cart" class="cart-jump" id="cart-jump"><i class="fa-solid fa-basket-shopping"></i> <span id="jump-count">0</span> · <span id="jump-total">৳0</span></a>
+
+<dialog id="var-dialog" class="var-dialog">
+  <form method="dialog">
+    <h3 id="var-title"></h3>
+    <div id="var-groups"></div>
+    <div class="var-actions">
+      <button value="cancel" class="btn btn-outline">{% trans "Cancel" %}</button>
+      <button value="ok" id="var-ok" class="btn btn-primary">{% trans "Add to cart" %}</button>
+    </div>
+  </form>
+</dialog>
+{% endblock %}
+
+{% block scripts %}
+{% trans "Out of stock" as t1 %}{% trans "in stock" as t2 %}{% trans "No products found" as t3 %}{% trans "Scan or tap a product to add it" as t4 %}{% trans "Not enough stock in this branch" as t5 %}{% trans "Paid amount is less than the total." as t6 %}{% trans "Saving..." as t7 %}{% trans "Clear the cart?" as t8 %}{% trans "Remove" as t9 %}
+<script>
+  window.POS = {
+    branch: {{ branch.pk }},
+    searchUrl: "{% url 'pos:product_search' %}",
+    saleUrl: "{% url 'pos:create_sale' %}",
+    maxDiscount: {{ max_discount }},
+    sellWithoutStock: {% if branch.sell_without_stock %}true{% else %}false{% endif %},
+    t: { out: "{{ t1|escapejs }}", inStock: "{{ t2|escapejs }}", none: "{{ t3|escapejs }}", empty: "{{ t4|escapejs }}",
+         noStock: "{{ t5|escapejs }}", lessPaid: "{{ t6|escapejs }}", saving: "{{ t7|escapejs }}", clear: "{{ t8|escapejs }}",
+         remove: "{{ t9|escapejs }}" }
+  };
+</script>
+<script src="{% static 'pos/pos.js' %}"></script>
+{% endblock %}

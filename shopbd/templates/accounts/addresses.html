@@ -1,0 +1,22 @@
+{% extends "accounts/account_base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Address Book" %} | {{ site.site_name }}{% endblock %}
+{% block account_content %}
+<section class="card">
+  <div class="section-head"><h2><i class="fa-solid fa-location-dot"></i> {% trans "Address Book" %}</h2>
+    <a href="{% url 'accounts:address_add' %}" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> {% trans "Add new" %}</a></div>
+  <div class="card-body saved-addresses" style="margin:0">
+    {% for a in addresses %}
+    <div class="addr-card {% if a.is_default %}active{% endif %}" style="cursor:default">
+      <strong>{{ a.full_name }} {% if a.is_default %}<span class="badge badge-primary">{% trans "Default" %}</span>{% endif %}</strong>
+      <span dir="ltr">{{ a.phone }}</span><br>{{ a.address_line }}, {{ a.area }}<br>{{ a.city }}, {{ a.get_division_display }}
+      <div style="display:flex;gap:.5rem;margin-top:.6rem">
+        <a href="{% url 'accounts:address_edit' a.pk %}" class="btn btn-outline btn-sm">{% trans "Edit" %}</a>
+        <form method="post" action="{% url 'accounts:address_delete' a.pk %}" data-confirm="{% trans 'Delete this address?' %}">{% csrf_token %}
+          <button class="btn btn-outline btn-sm" type="submit" style="color:var(--danger)">{% trans "Delete" %}</button></form>
+      </div>
+    </div>
+    {% empty %}<p class="muted">{% trans "You have no saved addresses." %}</p>{% endfor %}
+  </div>
+</section>
+{% endblock %}

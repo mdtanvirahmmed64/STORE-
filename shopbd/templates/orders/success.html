@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load i18n shop_tags %}
+{% block title %}{% trans "Order placed" %} | {{ site.site_name }}{% endblock %}
+{% block content %}
+<div class="container">
+  <section class="card card-body success-box">
+    <div class="success-icon"><i class="fa-solid fa-check"></i></div>
+    <h1 style="font-size:26px">{% trans "Thank you! Your order has been placed." %}</h1>
+    <p class="muted">{% trans "Order number" %}: <strong style="color:var(--text);font-size:18px">{{ order.order_number }}</strong></p>
+    <p>{% blocktrans with phone=order.phone %}We will call you at <strong>{{ phone }}</strong> to confirm your order.{% endblocktrans %}
+      {% if order.payment_method != "cod" %}{% blocktrans with method=order.get_payment_method_display trx=order.transaction_id %}Your {{ method }} payment (TrxID: {{ trx }}) is being verified.{% endblocktrans %}{% endif %}</p>
+    <div class="summary-row total" style="max-width:300px;margin:1rem auto"><span>{% trans "Total" %}</span><span>{{ order.total|taka }}</span></div>
+    <div style="display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap">
+      <a href="{% url 'orders:detail' order.order_number %}" class="btn btn-primary"><i class="fa-solid fa-box"></i> {% trans "View order" %}</a>
+      <a href="{% url 'orders:invoice' order.order_number %}" class="btn btn-outline"><i class="fa-solid fa-file-invoice"></i> {% trans "Invoice" %}</a>
+      <a href="{% url 'store:product_list' %}" class="btn btn-outline">{% trans "Continue shopping" %}</a>
+    </div>
+    <p class="muted mt-2" style="font-size:13px">{% trans "Save your order number. You can track it anytime from" %} <a class="btn-link" href="{% url 'orders:track' %}">{% trans "Track Order" %}</a>.</p>
+  </section>
+</div>
+{% endblock %}
